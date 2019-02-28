@@ -26,4 +26,9 @@ export class UserService {
     async getAll() {
         return await this.userRepository.find();
     }
+
+    async updateUser( userId, userData ) {
+        const user = await this.userRepository.findOne( userId );
+        return await this.userRepository.update( userId, { ...user, ...userData } );
+    }
 }

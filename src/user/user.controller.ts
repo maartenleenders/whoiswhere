@@ -19,4 +19,9 @@ export class UserController {
     setBuilding(@Body() updateBuildingDto, @Param() params ) {
         return this.userService.setBuilding( params.id, updateBuildingDto.id );
     }
+
+    @Patch('/:id')
+    updateUser(@Body() createUserDto, @Param() params ) {
+        return this.userService.updateUser( params.id, createUserDto );
+    }
 }
