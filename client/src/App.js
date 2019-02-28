@@ -14,7 +14,6 @@ class App extends Component {
 
 	getUsers() {
 		fetch( "http://localhost:3000/user" ).then( res => res.json() ).then( users => {
-			console.log( users );
 			this.setState( { users } );
 		} );
 	}
