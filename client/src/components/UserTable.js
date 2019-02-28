@@ -6,7 +6,7 @@ export default class UserTable extends React.Component {
 		super();
 		this.getUsers = this.getUsers.bind( this );
 	}
-	state = { users: [] };
+	state = { users: [], showGif: false };
 
 	getUsers() {
 		fetch( "http://localhost:3000/user" ).then( res => res.json() ).then( users => {
@@ -25,7 +25,13 @@ export default class UserTable extends React.Component {
 						<th>2</th>
 						<th>3</th>
 						<th>4</th>
-						<th>🏝</th>
+						<th
+							onClick={ () => {
+								this.setState( { showGif: ! this.state.showGif } )
+							} }
+						>
+							🏝
+						</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -43,6 +49,15 @@ export default class UserTable extends React.Component {
 						Add friend!
 					</button>
 				</div>
+				{
+					<div
+						style={ { display: this.state.showGif ? "block" : "none", margin: "0 auto" } }
+					>
+						<iframe src="https://giphy.com/embed/5xtDarqlsEW6F7F14Fq" width="480" height="270"
+								frameBorder="0" className="giphy-embed" allowFullScreen style={ { margin: "0 auto" } }>
+						</iframe>
+					</div>
+				}
 			</Fragment>
 		);
 	}

@@ -2,6 +2,7 @@ import React from "react";
 
 export default class UserRow extends React.Component {
 	userInBuilding( buildingId ) {
+		const isUserInBuilding = this.props.user.buildingId === buildingId;
 		return(
 			<td
 				onClick={ () => {
@@ -11,14 +12,14 @@ export default class UserRow extends React.Component {
 							"Content-Type": "application/json",
 						},
 						body: JSON.stringify( {
-							buildingId,
+							buildingId: isUserInBuilding ? null : buildingId,
 						} ),
 					} ).then( () => {
 						this.props.refresh();
 					} );
 				} }
 			>
-				{ this.props.user.buildingId === buildingId ? "✅" : "❌" }
+				{ isUserInBuilding ? "✅" : "❌" }
 			</td>
 		);
 	}
