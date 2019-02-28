@@ -6,8 +6,8 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Get()
-    findAll(): string {
-        return 'Returns all users';
+    getAll() {
+        return this.userService.getAll();
     }
 
     @Post()
@@ -16,7 +16,7 @@ export class UserController {
     }
 
     @Post('/:id/set-building')
-    async setBuilding(@Body() updateBuildingDto, @Param() params ) {
-        return await this.userService.setBuilding( params.id, updateBuildingDto.id );
+    setBuilding(@Body() updateBuildingDto, @Param() params ) {
+        return this.userService.setBuilding( params.id, updateBuildingDto.id );
     }
 }

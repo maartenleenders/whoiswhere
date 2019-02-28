@@ -19,7 +19,11 @@ export class UserService {
     }
 
     async setBuilding( userId, buildingId ) {
-        await this.userRepository.update( userId, { building: buildingId } );
+        await this.userRepository.update( userId, { buildingId } );
         return "That went really well!";
+    }
+
+    async getAll() {
+        return await this.userRepository.find();
     }
 }

@@ -6,7 +6,7 @@ export class BuildingController {
     constructor(private readonly buildingService: BuildingService) {}
 
     @Get()
-    findAll() {
+    getAll() {
         return this.buildingService.getAll();
     }
 
