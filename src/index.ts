@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import {createConnection} from 'typeorm';
 import {User} from './entity/User';
+import {bootstrap} from './bootstrap-nestjs';
 
 createConnection().then(async connection => {
 
@@ -16,6 +17,6 @@ createConnection().then(async connection => {
     const users = await connection.manager.find(User);
     console.log('Loaded users: ', users);
 
-    console.log('Here you can setup and run express/koa/any other framework.');
+    bootstrap();
 
 }).catch(error => console.log(error));
