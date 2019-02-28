@@ -1,12 +1,10 @@
 import 'reflect-metadata';
-import {createConnection} from 'typeorm';
-import {bootstrap} from './bootstrap-nestjs';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
-createConnection().then(async ( connection ) => {
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.listen(3000);
+}
 
-    if ( connection ) {
-        bootstrap();
-    } else {
-        console.error( "No connection" );
-    }
-}).catch(error => console.log(error));
+bootstrap();

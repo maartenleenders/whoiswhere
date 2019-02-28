@@ -1,8 +1,11 @@
 import {Body, Controller, Get, Post} from '@nestjs/common';
 import {User} from "./user.entity";
+import {UsersService} from "./users.service";
 
 @Controller('users')
 export class UsersController {
+    constructor(private readonly usersService: UsersService) {}
+
     @Get()
     findAll(): string {
         return 'Returns all users';
@@ -10,12 +13,6 @@ export class UsersController {
 
     @Post()
     create(@Body() createUserDto ) {
-        console.log( createUserDto.age );
-        const user = new User();
-        user.age = createUserDto.age;
-        user.firstName = createUserDto.firstName;
-        user.lastName = createUserDto.lastName;
-        console.log( user );
-        return "Creating a new user is easy peazy";
+        return this.usersService.create( createUserDto );
     }
 }
