@@ -17,7 +17,7 @@ export class UserController {
 
     @Post('/:id/set-building')
     setBuilding(@Body() updateBuildingDto, @Param() params ) {
-        return this.userService.setBuilding( params.id, updateBuildingDto.id );
+        return this.userService.setBuilding( params.id, updateBuildingDto.buildingId );
     }
 
     @Patch('/:id')

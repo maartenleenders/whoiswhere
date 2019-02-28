@@ -19,6 +19,7 @@ export class UserService {
     }
 
     async setBuilding( userId, buildingId ) {
+        console.log( buildingId );
         await this.userRepository.update( userId, { buildingId } );
         return "That went really well!";
     }
