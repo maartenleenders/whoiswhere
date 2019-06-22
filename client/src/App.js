@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import UserTable from "./components/UserTable";
 import AddUser from "./components/AddUser";
+import io from  "socket.io-client";
 
 
+const socket = io( "http://localhost:3000" );
 
 class App extends Component {
 	state = { page: "users" };
@@ -13,11 +15,13 @@ class App extends Component {
 			case "add-user":
 				return <AddUser
 					goTo={ ( page ) => this.setState( { page } ) }
+					socket={ socket }
 				/>;
 			case "users":
 			default:
 				return <UserTable
 					goTo={ ( page ) => this.setState( { page } ) }
+					socket={ socket }
 				/>
 		}
 	}

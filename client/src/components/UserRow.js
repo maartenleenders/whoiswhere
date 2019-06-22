@@ -14,7 +14,14 @@ export default class UserRow extends React.Component {
 						body: JSON.stringify( {
 							buildingId: isUserInBuilding ? null : buildingId,
 						} ),
-					} ).then( () => {
+					} )
+						.then( () => {
+							this.props.socket.emit( "buildingChange", {
+								user: this.props.user,
+								buildingId: isUserInBuilding ? null : buildingId,
+							} )
+						} )
+						.then( () => {
 						this.props.refresh();
 					} );
 				} }

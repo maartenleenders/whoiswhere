@@ -36,7 +36,7 @@ export default class UserTable extends React.Component {
 					</thead>
 					<tbody>
 					{ this.state.users.map( user => (
-						<UserRow key={user.id} user={user} refresh={ this.getUsers } />
+						<UserRow key={user.id} user={user} refresh={ this.getUsers } socket={ this.props.socket }/>
 					) ) }
 					</tbody>
 				</table>
@@ -64,6 +64,6 @@ export default class UserTable extends React.Component {
 
 	componentDidMount() {
 		this.getUsers();
-		setInterval( this.getUsers, 2000 );
+		// setInterval( this.getUsers, 2000 );
 	}
 }

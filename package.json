@@ -27,6 +27,7 @@
       "reflect-metadata": "^0.1.10",
       "rimraf": "^2.6.3",
       "rxjs": "^6.3.3",
+      "socket.io": "^2.2.0",
       "sqlite3": "^4.0.3",
       "typeorm": "0.2.14"
    },
