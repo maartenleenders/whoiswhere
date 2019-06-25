@@ -5,26 +5,14 @@ export default class UserRow extends React.Component {
 		const isUserInBuilding = this.props.user.buildingId === buildingId;
 		return(
 			<td
-				onClick={ () => {
-					fetch( `http://localhost:3000/user/${ this.props.user.id }/set-building`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify( {
+				onClick={
+					() => {
+						this.props.socket.emit( "buildingChange", {
+							userId: this.props.user.id,
 							buildingId: isUserInBuilding ? null : buildingId,
-						} ),
-					} )
-						.then( () => {
-							this.props.socket.emit( "buildingChange", {
-								user: this.props.user,
-								buildingId: isUserInBuilding ? null : buildingId,
-							} )
-						} )
-						.then( () => {
-						this.props.refresh();
-					} );
-				} }
+						} );
+					}
+				}
 			>
 				{ isUserInBuilding ? "✅" : "❌" }
 			</td>

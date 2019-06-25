@@ -15,6 +15,7 @@ export default class UserTable extends React.Component {
 	}
 
 	render() {
+		console.log( this.state );
 		return (
 			<Fragment>
 				<table className="user-table" >
@@ -64,6 +65,20 @@ export default class UserTable extends React.Component {
 
 	componentDidMount() {
 		this.getUsers();
+		this.props.socket.on( "buildingChange", ( data ) => {
+			console.log( "I'M HERE!" );
+			this.setState( {
+				users: this.state.users.map( ( user ) => {
+					if ( user.id === data.userId ) {
+						return {
+							...user,
+							buildingId: data.buildingId,
+						}
+					}
+					return user;
+				} ),
+			} );
+		} );
 		// setInterval( this.getUsers, 2000 );
 	}
 }

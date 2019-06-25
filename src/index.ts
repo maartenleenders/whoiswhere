@@ -12,8 +12,8 @@ async function bootstrap() {
     console.log( "New connection: ", socket.id );
 
     socket.on( "buildingChange", ( data ) => {
-      const userName = `${ data.user.firstName } ${ data.user.lastName }`;
-      const logString = data.buildingId ? `${ userName } changed to building #${ data.buildingId }.` : `${ userName } checked out! Later!`;
+      const logString = data.buildingId ? `${ data.userId } changed to building #${ data.buildingId }.` : `${ data.userId } checked out! Later!`;
+      io.sockets.emit( "buildingChange", data );
       console.log( logString );
     } );
   } );
