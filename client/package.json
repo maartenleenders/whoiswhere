@@ -5,7 +5,9 @@
   "dependencies": {
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-redux": "^7.1.0",
     "react-scripts": "2.1.5",
+    "redux": "^4.0.1",
     "socket.io-client": "^2.2.0"
   },
   "scripts": {
@@ -22,5 +24,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "react-devtools": "^3.6.1"
+  }
 }

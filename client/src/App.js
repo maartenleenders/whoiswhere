@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
-import UserTable from "./components/UserTable";
-import AddUser from "./components/AddUser";
 import io from  "socket.io-client";
+
+import './App.css';
+import AddUser from "./components/AddUser";
+import UserTableContainer from "./containers/UserTableContainer";
 
 
 const socket = io( "http://localhost:3000" );
@@ -19,7 +20,7 @@ class App extends Component {
 				/>;
 			case "users":
 			default:
-				return <UserTable
+				return <UserTableContainer
 					goTo={ ( page ) => this.setState( { page } ) }
 					socket={ socket }
 				/>
