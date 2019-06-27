@@ -4,15 +4,9 @@ import UserRow from "./UserRow";
 export default class UserTable extends React.Component {
 	constructor() {
 		super();
-		this.getUsers = this.getUsers.bind( this );
 	}
-	state = { users: [], showGif: false };
 
-	getUsers() {
-		fetch( "http://localhost:3000/user" ).then( res => res.json() ).then( users => {
-			this.setState( { users } );
-		} );
-	}
+	state = { showGif: false };
 
 	render() {
 		console.log( this.state );
@@ -36,8 +30,8 @@ export default class UserTable extends React.Component {
 					</tr>
 					</thead>
 					<tbody>
-					{ this.state.users.map( user => (
-						<UserRow key={user.id} user={user} refresh={ this.getUsers } socket={ this.props.socket }/>
+					{ this.props.users.map( user => (
+						<UserRow key={user.id} user={user} refresh={ () => {} } socket={ this.props.socket }/>
 					) ) }
 					</tbody>
 				</table>
@@ -64,20 +58,11 @@ export default class UserTable extends React.Component {
 	}
 
 	componentDidMount() {
-		this.getUsers();
+		this.props.getUsers();
 		this.props.socket.on( "buildingChange", ( data ) => {
-			console.log( "I'M HERE!" );
-			this.setState( {
-				users: this.state.users.map( ( user ) => {
-					if ( user.id === data.userId ) {
-						return {
-							...user,
-							buildingId: data.buildingId,
-						}
-					}
-					return user;
-				} ),
-			} );
+			const userId = data.userId;
+			const buildingId = data.buildingId;
+			this.props.updateUserBuilding( userId, buildingId );
 		} );
 		// setInterval( this.getUsers, 2000 );
 	}
