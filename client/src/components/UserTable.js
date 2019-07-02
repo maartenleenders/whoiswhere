@@ -9,7 +9,6 @@ export default class UserTable extends React.Component {
 	state = { showGif: false };
 
 	render() {
-		console.log( this.state );
 		return (
 			<Fragment>
 				<table className="user-table" >
@@ -31,7 +30,7 @@ export default class UserTable extends React.Component {
 					</thead>
 					<tbody>
 					{ this.props.users.map( user => (
-						<UserRow key={user.id} user={user} refresh={ () => {} } socket={ this.props.socket }/>
+						<UserRow key={user.id} user={user} socket={ this.props.socket }/>
 					) ) }
 					</tbody>
 				</table>
@@ -55,15 +54,5 @@ export default class UserTable extends React.Component {
 				}
 			</Fragment>
 		);
-	}
-
-	componentDidMount() {
-		this.props.getUsers();
-		this.props.socket.on( "buildingChange", ( data ) => {
-			const userId = data.userId;
-			const buildingId = data.buildingId;
-			this.props.updateUserBuilding( userId, buildingId );
-		} );
-		// setInterval( this.getUsers, 2000 );
 	}
 }

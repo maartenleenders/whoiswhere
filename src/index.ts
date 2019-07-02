@@ -17,6 +17,7 @@ async function bootstrap() {
       console.log( logString );
     } );
   } );
+
   await app.listen(3000);
 }
 
