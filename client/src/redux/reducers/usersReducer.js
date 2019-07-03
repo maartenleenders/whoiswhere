@@ -1,8 +1,12 @@
-import { RETRIEVE_USERS_SUCCESS, UPDATE_USER_BUILDING } from "../actions/users";
+import { UPDATE_USER_BUILDING } from "../actions/users";
 
 const initialState = {
-	byId: {},
-	allIds: [],
+	byId: { 1: {
+		firstName: "Ted",
+		lastName: "Schmosby",
+		id: 1,
+	} },
+	allIds: [ 1 ],
 };
 
 export function usersByIdReducer( state = initialState.byId, action ) {
@@ -11,12 +15,6 @@ export function usersByIdReducer( state = initialState.byId, action ) {
 			const newState = Object.assign( {}, state );
 			newState[ action.userId ] = Object.assign( {}, newState[ action.userId ], { buildingId: action.buildingId } );
 			return newState;
-		case RETRIEVE_USERS_SUCCESS:
-			const retrievedUsers = {};
-			action.users.forEach( ( user ) => {
-				retrievedUsers[ user.id ] = user;
-			} );
-			return Object.assign( {}, state, retrievedUsers );
 		default:
 			return state;
 	}
@@ -24,8 +22,6 @@ export function usersByIdReducer( state = initialState.byId, action ) {
 
 export function usersAllIdsReducer( state = initialState.allIds, action ) {
 	switch ( action.type ) {
-		case RETRIEVE_USERS_SUCCESS:
-			return action.users.map( user => user.id );
 		default:
 			return state;
 	}

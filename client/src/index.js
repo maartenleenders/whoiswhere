@@ -10,16 +10,19 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import io from "socket.io-client";
 import { updateUserBuilding } from "./redux/actions/users";
+import socketActions from "./redux/middleware/socketActions";
 
-const store = createStore(
-	rootReducer,
-	composeWithDevTools( applyMiddleware( thunk ) ),
-);
 
 const socket = io( "http://localhost:3000" );
 
-socket.on( "setInitialData", ( data ) => {
-	console.log( data );
+const middleWare = [ thunk, socketActions( socket ) ];
+const store = createStore(
+	rootReducer,
+	composeWithDevTools( applyMiddleware( ...middleWare ) ),
+);
+
+socket.on( "serverReduxAction", ( action ) => {
+	store.dispatch( action );
 } );
 
 socket.on( "buildingChange", ( data ) => {

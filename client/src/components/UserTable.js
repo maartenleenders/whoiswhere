@@ -8,6 +8,10 @@ export default class UserTable extends React.Component {
 
 	state = { showGif: false };
 
+	componentDidMount() {
+		this.props.getUsers();
+	}
+
 	render() {
 		return (
 			<Fragment>
@@ -30,7 +34,7 @@ export default class UserTable extends React.Component {
 					</thead>
 					<tbody>
 					{ this.props.users.map( user => (
-						<UserRow key={user.id} user={user} socket={ this.props.socket }/>
+						<UserRow key={user.id} user={user} changeBuilding={ this.props.changeBuilding }/>
 					) ) }
 					</tbody>
 				</table>
