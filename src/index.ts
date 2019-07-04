@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as socketIo from "socket.io";
 import {UserController} from "./user/user.controller";
+import {UserService} from "./user/user.service";
 
 const onConnect = app => socket => {
   console.log( "New connection: ", socket.id );
@@ -15,11 +16,7 @@ async function handleReduxAction( action, socket, app ) {
       // Strip emit from action to prevent infinite loop
       const { emit, ...strippedAction } = action;
       socket.broadcast.emit( "serverReduxAction", strippedAction );
-      console.log( `TO DO: Should set user ${ action.userId } to ${
-        action.buildingId
-          ? `building ${ action.buildingId }`
-          : `'at the beach'`
-      } in the database` );
+      await app.get( UserService ).setBuilding( action.userId, action.buildingId );
       return;
     case "RETRIEVE_USERS":
       const users = await app.get( UserController ).getAll();
