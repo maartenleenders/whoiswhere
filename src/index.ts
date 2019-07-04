@@ -15,7 +15,8 @@ async function handleReduxAction( action, socket, app ) {
       // Strip emit from action to prevent infinite loop
       const { emit, ...strippedAction } = action;
       socket.broadcast.emit( "serverReduxAction", strippedAction );
-      return `Should set user ${ action.userId } to ${ action.buildingId ? `building ${ action.buildingId }` : `'at the beach'.` }`;
+      console.log( `TO DO: Should set user ${ action.userId } to ${ action.buildingId ? `building ${ action.buildingId }` : `'at the beach'` } in the database` );
+      return;
     case "RETRIEVE_USERS":
       const users = await app.get( UserController ).getAll();
       const answerAction = {
