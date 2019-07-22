@@ -12,7 +12,7 @@
  */
 const socketActions = socket => store => next => action => {
 	if ( action.emit ) {
-		socket.emit( "clientReduxAction", action );
+		socket.emit( action.type, action );
 	}
 	return next( action );
 };

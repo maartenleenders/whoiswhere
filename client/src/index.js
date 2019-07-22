@@ -25,12 +25,6 @@ socket.on( "serverReduxAction", ( action ) => {
 	store.dispatch( action );
 } );
 
-socket.on( "buildingChange", ( data ) => {
-	const userId = data.userId;
-	const buildingId = data.buildingId;
-	this.props.store.dispatch( updateUserBuilding( userId, buildingId ) );
-} );
-
 ReactDOM.render(
 	<Provider store={ store }>
 		<App socket={ socket }/>

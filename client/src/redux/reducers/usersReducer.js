@@ -17,7 +17,7 @@ export function usersByIdReducer( state = initialState.byId, action ) {
 				newState[ action.userId ] = Object.assign( {}, newState[ action.userId ], { buildingId: action.buildingId } );
 				return newState;
 			}
-		case "USERS_RECEIVED":
+		case "INCOMING_USERS":
 			{
 				let newState = Object.assign( {}, state );
 				action.users.forEach( ( user ) => {
@@ -33,7 +33,7 @@ export function usersByIdReducer( state = initialState.byId, action ) {
 
 export function usersAllIdsReducer( state = initialState.allIds, action ) {
 	switch ( action.type ) {
-		case "USERS_RECEIVED":
+		case "INCOMING_USERS":
 		{
 			return action.users.map( user => user.id );
 		}

@@ -4,8 +4,12 @@ import {
     WebSocketServer,
 } from '@nestjs/websockets';
 import { Client, Server } from 'socket.io';
-import { ReduxActionTypes } from "../types/reduxTypes";
 import {UserService} from "../user/user.service";
+import {
+    RetrieveUsersAction,
+    UpdateUserBuildingAction,
+} from "../types/reduxTypes";
+import { wrapReduxResponse } from "../helpers/gatewayEventHandlerHelpers";
 
 @WebSocketGateway()
 export class EventsGateway {
@@ -16,16 +20,26 @@ export class EventsGateway {
     @WebSocketServer()
     server: Server;
 
-    @SubscribeMessage('clientReduxAction')
-    async handleReduxAction( client: Client, action: ReduxActionTypes ) {
-        if ( action.type && action.type === "RETRIEVE_USERS" ) {
-            const users = await this.userService.getAll();
-            return {
-                event: "serverReduxAction",
-                data: {
-                    type: "USERS_RECEIVED",
-                    users,
-            } };
-        }
+    @SubscribeMessage( "RETRIEVE_USERS" )
+    async retrieveUsers( client: Client, action: RetrieveUsersAction ) {
+        const users = await this.userService.getAll();
+        return wrapReduxResponse( {
+                type: "INCOMING_USERS",
+                users,
+        } );
+    }
+
+    @SubscribeMessage( "UPDATE_USER_BUILDING" )
+    async updateUserBuilding( client: Client, action: UpdateUserBuildingAction ) {
+        await this.userService.setBuilding( action.userId, action.buildingId );
+        client.broadcast.emit(
+            wrapReduxResponse(
+                {
+                    type: "UPDATE_USER_BUILDING",
+                    userId: action.userId,
+                    buildingId: action.buildingId,
+                },
+            ),
+        );
     }
 }
