@@ -6,8 +6,6 @@ export default class UserTable extends React.Component {
 		super();
 	}
 
-	state = { showGif: false };
-
 	componentDidMount() {
 		this.props.getUsers();
 	}
@@ -23,13 +21,7 @@ export default class UserTable extends React.Component {
 						<th>2</th>
 						<th>3</th>
 						<th>4</th>
-						<th
-							onClick={ () => {
-								this.setState( { showGif: ! this.state.showGif } )
-							} }
-						>
-							🏝
-						</th>
+						<th>🏝</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -47,15 +39,6 @@ export default class UserTable extends React.Component {
 						Add friend!
 					</button>
 				</div>
-				{
-					<div
-						style={ { display: this.state.showGif ? "block" : "none", margin: "0 auto" } }
-					>
-						<iframe src="https://giphy.com/embed/5xtDarqlsEW6F7F14Fq" width="480" height="270"
-								frameBorder="0" className="giphy-embed" allowFullScreen style={ { margin: "0 auto" } }>
-						</iframe>
-					</div>
-				}
 			</Fragment>
 		);
 	}
