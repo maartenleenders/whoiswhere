@@ -9,6 +9,7 @@ import {Connection} from "typeorm";
 import {User} from "./user/user.entity";
 import {Building} from "./buildings/building.entity";
 import {BuildingService} from "./buildings/building.service";
+import {EventsGateway} from './events/events.gateway';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import {BuildingService} from "./buildings/building.service";
       TypeOrmModule.forFeature( [ User, Building ] ),
   ],
   controllers: [AppController, BuildingController, UserController],
-  providers: [AppService, UserService, BuildingService],
+  providers: [AppService, UserService, BuildingService, EventsGateway],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}
