@@ -9,7 +9,6 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import io from "socket.io-client";
-import { updateUserBuilding } from "./redux/actions/users";
 import socketActions from "./redux/middleware/socketActions";
 
 
@@ -23,12 +22,6 @@ const store = createStore(
 
 socket.on( "serverReduxAction", ( action ) => {
 	store.dispatch( action );
-} );
-
-socket.on( "buildingChange", ( data ) => {
-	const userId = data.userId;
-	const buildingId = data.buildingId;
-	this.props.store.dispatch( updateUserBuilding( userId, buildingId ) );
 } );
 
 ReactDOM.render(

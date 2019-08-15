@@ -25,7 +25,7 @@ async function handleReduxAction( action, socket, app ) {
         users,
       };
       socket.emit( "serverReduxAction", answerAction );
-      return `Should send users object`;
+      return;
     default:
       return action;
   }
