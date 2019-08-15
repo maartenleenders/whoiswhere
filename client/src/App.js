@@ -12,13 +12,11 @@ class App extends Component {
 			case "add-user":
 				return <AddUser
 					goTo={ ( page ) => this.setState( { page } ) }
-					socket={ this.props.socket }
 				/>;
 			case "users":
 			default:
 				return <UserTableContainer
 					goTo={ ( page ) => this.setState( { page } ) }
-					socket={ this.props.socket }
 				/>
 		}
 	}

@@ -33,7 +33,7 @@ socket.on( "buildingChange", ( data ) => {
 
 ReactDOM.render(
 	<Provider store={ store }>
-		<App socket={ socket }/>
+		<App />
 	</Provider>,
 	document.getElementById('root')
 );
