@@ -14,10 +14,13 @@ export class UserService {
         const user = new User();
         user.firstName = userData.firstName;
         user.lastName = userData.lastName;
-        // user.age = userData.age;
         return await this.userRepository.save( user );
     }
 
+    async delete( id ) {
+        return await this.userRepository
+            .delete( { id } );
+    }
     async setBuilding( userId, buildingId ) {
         await this.userRepository.update( userId, { buildingId } );
         return "That went really well!";

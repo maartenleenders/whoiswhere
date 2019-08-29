@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import { usersAllIdsReducer, usersByIdReducer } from "./usersReducer";
+import { uiReducer } from "./uiReducer";
 
 const usersReducer = combineReducers( {
 	byId: usersByIdReducer,
@@ -12,6 +13,7 @@ const entitiesReducer = combineReducers( {
 
 const rootReducer = combineReducers( {
 	entities: entitiesReducer,
+	ui: uiReducer,
 } ) ;
 
 export default rootReducer;
