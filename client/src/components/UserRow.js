@@ -3,36 +3,45 @@ import React from "react";
 export default class UserRow extends React.Component {
 	userInBuilding( buildingId ) {
 		const isUserInBuilding = this.props.user.buildingId === buildingId;
-		return(
+		const newBuildingId = isUserInBuilding ? null : buildingId;
+		return (
 			<td
-				onClick={ () => {
-					fetch( `http://localhost:3000/user/${ this.props.user.id }/set-building`, {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json",
-						},
-						body: JSON.stringify( {
-							buildingId: isUserInBuilding ? null : buildingId,
-						} ),
-					} ).then( () => {
-						this.props.refresh();
-					} );
-				} }
+				onClick={
+					() => {
+						this.props.changeBuilding( this.props.user.id, newBuildingId );
+					}
+				}
 			>
-				{ isUserInBuilding ? "✅" : "❌" }
+				{isUserInBuilding ? "✅" : "❌"}
 			</td>
 		);
 	}
+
+	renderDeleteButton( userId ) {
+		if ( this.props.adminLoggedIn ) {
+			return(
+				<td>
+					<button onClick={ () => this.props.deleteUser( userId ) }>
+						🗑️
+					</button>
+				</td>
+			);
+		}
+	}
+
 	render() {
 		const user = this.props.user;
 		return (
 			<tr>
-				<td>{ user.firstName + " " + user.lastName }</td>
-				{ this.userInBuilding( 1 ) }
-				{ this.userInBuilding( 2 ) }
-				{ this.userInBuilding( 3 ) }
-				{ this.userInBuilding( 4 ) }
-				{ this.userInBuilding( null ) }
+				<td>{user.firstName + " " + user.lastName}</td>
+				{this.userInBuilding( 1 )}
+				{this.userInBuilding( 2 )}
+				{this.userInBuilding( 3 )}
+				{this.userInBuilding( 4 )}
+				{this.userInBuilding( null )}
+				{
+					this.renderDeleteButton( user.id )
+				}
 			</tr>
 		);
 	}

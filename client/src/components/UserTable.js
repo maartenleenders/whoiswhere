@@ -4,66 +4,65 @@ import UserRow from "./UserRow";
 export default class UserTable extends React.Component {
 	constructor() {
 		super();
-		this.getUsers = this.getUsers.bind( this );
 	}
-	state = { users: [], showGif: false };
 
-	getUsers() {
-		fetch( "http://localhost:3000/user" ).then( res => res.json() ).then( users => {
-			this.setState( { users } );
-		} );
+	componentDidMount() {
+		this.props.getUsers();
+	}
+
+	renderAdminOptions() {
+		if ( this.props.adminLoggedIn ) {
+			return(
+				<div
+					className="button-area"
+				>
+					<button
+						onClick={ () => this.props.goTo( "new-user" ) }
+					>
+						Add friend!
+					</button>
+				</div>
+			);
+		}
+		return null;
 	}
 
 	render() {
 		return (
 			<Fragment>
-				<table className="user-table" >
-					<thead>
-					<tr>
-						<th>Name</th>
-						<th>1</th>
-						<th>2</th>
-						<th>3</th>
-						<th>4</th>
-						<th
-							onClick={ () => {
-								this.setState( { showGif: ! this.state.showGif } )
-							} }
-						>
-							🏝
-						</th>
-					</tr>
-					</thead>
-					<tbody>
-					{ this.state.users.map( user => (
-						<UserRow key={user.id} user={user} refresh={ this.getUsers } />
-					) ) }
-					</tbody>
-				</table>
-				<div
-					className="button-area"
-				>
+				<div>
+					<table className="user-table" >
+						<thead>
+						<tr>
+							<th>Name</th>
+							<th>1</th>
+							<th>2</th>
+							<th>3</th>
+							<th>4</th>
+							<th>🏝</th>
+						</tr>
+						</thead>
+						<tbody>
+						{ this.props.users.map( user => (
+							<UserRow
+								key={user.id}
+								user={user}
+								changeBuilding={ this.props.changeBuilding }
+								deleteUser={ this.props.deleteUser }
+								adminLoggedIn={ this.props.adminLoggedIn }
+							/>
+						) ) }
+						</tbody>
+					</table>
 					<button
-						onClick={ () => this.props.goTo( "add-user" ) }
+						className="show-admin-toggle"
+						onClick={ () => this.props.toggleAdminOptions() }
 					>
-						Add friend!
+						⚙️
 					</button>
 				</div>
-				{
-					<div
-						style={ { display: this.state.showGif ? "block" : "none", margin: "0 auto" } }
-					>
-						<iframe src="https://giphy.com/embed/5xtDarqlsEW6F7F14Fq" width="480" height="270"
-								frameBorder="0" className="giphy-embed" allowFullScreen style={ { margin: "0 auto" } }>
-						</iframe>
-					</div>
-				}
+				{ this.renderAdminOptions() }
 			</Fragment>
 		);
-	}
-
-	componentDidMount() {
-		this.getUsers();
-		setInterval( this.getUsers, 2000 );
 	}
 }

@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
+
 import './App.css';
-import UserTable from "./components/UserTable";
-import AddUser from "./components/AddUser";
-
-
+import UserTableContainer from "./containers/UserTableContainer";
+import NewUserContainer from "./containers/NewUserContainer";
 
 class App extends Component {
 	state = { page: "users" };
 
 	getContent() {
 		switch( this.state.page ) {
-			case "add-user":
-				return <AddUser
+			case "new-user":
+				return <NewUserContainer
 					goTo={ ( page ) => this.setState( { page } ) }
+
 				/>;
 			case "users":
 			default:
-				return <UserTable
+				return <UserTableContainer
 					goTo={ ( page ) => this.setState( { page } ) }
 				/>
 		}

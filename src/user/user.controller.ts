@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Get, Param, Patch, Post, Delete} from '@nestjs/common';
 import {UserService} from "./user.service";
 
 @Controller('user')
@@ -23,5 +23,13 @@ export class UserController {
     @Patch('/:id')
     updateUser(@Body() createUserDto, @Param() params ) {
         return this.userService.updateUser( params.id, createUserDto );
+    }
+
+    @Post( '/:id/delete' )
+    async deleteUser( @Param() params ) {
+        console.log( "DELETE REQUEST INCOMING OMG!" );
+        console.log( params );
+        const response = await this.userService.delete( params.id );
+        console.log( response );
     }
 }

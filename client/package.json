@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nestjs/platform-socket.io": "^6.5.2",
+    "@nestjs/websockets": "^6.5.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-redux": "^7.1.0",
+    "react-scripts": "2.1.5",
+    "redux": "^4.0.1",
+    "socket.io-client": "^2.2.0"
   },
   "scripts": {
     "start": "PORT=3001 react-scripts start",
@@ -21,5 +26,10 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@types/socket.io": "^2.1.2",
+    "react-devtools": "^3.6.1",
+    "redux-devtools-extension": "^2.13.8"
+  }
 }
