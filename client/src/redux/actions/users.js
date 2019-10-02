@@ -44,10 +44,26 @@ export function newUserCreated( user ) {
 	}
 }
 
-export function deleteUserRequest( userId ) {
+export function deleteUserRequest_legacy( userId ) {
 	return {
 		type: DELETE_USER_REQUEST,
 		userId,
 		emit: true,
+	}
+}
+
+export function deleteUserRequest( userId ) {
+	const Http = new XMLHttpRequest();
+	const url = `http://localhost:3000/user/${userId}/delete`;
+	Http.open( "POST", url );
+	Http.send();
+
+	Http.onreadystatechange = () => {
+		console.log( Http.responseText );
+	};
+	return {
+		type: DELETE_USER_REQUEST,
+		userId,
+		emit: false,
 	}
 }
