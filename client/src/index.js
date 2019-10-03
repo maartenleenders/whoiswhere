@@ -13,6 +13,7 @@ import socketActions from "./redux/middleware/socketActions";
 
 
 const socket = io( "http://localhost:3000" );
+// const socket = io( "http://localhost:1337" );
 
 const middleWare = [ thunk, socketActions( socket ) ];
 const store = createStore(
@@ -21,11 +22,8 @@ const store = createStore(
 );
 
 socket.on( "serverReduxAction", ( action ) => {
+	console.log( action );
 	store.dispatch( action );
-} );
-
-socket.on( "test", ( data ) => {
-	console.log( data );
 } );
 
 ReactDOM.render(

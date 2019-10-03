@@ -1,6 +1,10 @@
 {
-   "type": "sqlite",
-   "database": "database.sqlite",
+   "type": "mysql",
+   "database": "whoiswhere",
+   "host": "whoiswhere-mysql",
+   "port": 3306,
+   "username": "root",
+   "password": "password",
    "synchronize": true,
    "logging": false,
    "entities": [

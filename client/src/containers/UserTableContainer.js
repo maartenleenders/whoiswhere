@@ -6,6 +6,7 @@ import { toggleAdminOptions } from "../redux/actions/ui";
 function mapStateToProps( state ) {
 	const users = state.entities.users.allIds.map( userId => state.entities.users.byId[ userId ] );
 	const adminLoggedIn = state.ui.adminLoggedIn;
+	console.log( state );
 	return {
 		users,
 		adminLoggedIn,

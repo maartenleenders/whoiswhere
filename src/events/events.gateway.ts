@@ -37,6 +37,7 @@ export class EventsGateway {
 
     @SubscribeMessage(UPDATE_USER_BUILDING)
     async updateUserBuilding(client: Client, action: UpdateUserBuildingAction) {
+        console.log( "serverside updateuserbuilding:", action );
         await this.userService.setBuilding(action.userId, action.buildingId);
         client.broadcast.emit("serverReduxAction", {
                 type: UPDATE_USER_BUILDING,
