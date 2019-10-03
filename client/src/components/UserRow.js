@@ -1,47 +1,57 @@
 import React from "react";
+import PresenceSwitch from "./PresenceSwitch";
+import { ReactComponent as Wastebin } from "./svg/wastebin.svg";
+import styled from "styled-components";
+
+const StyledTd = styled.td`
+  	font-size: 1em;
+  	border-radius: 10px;
+  	text-align: center;
+`;
+
+const StyledButton = styled.button`
+  	font-size: 1em;
+  	text-align: center;
+  	horizontal-align: center;
+	border-color: transparent;
+	background-color: transparent;
+`;
+
+const stylify = function( image ) {
+	return styled( image )`
+		height: 40px;
+		width: 40px;
+		background-color: transparent;
+		color: gray;
+	`
+};
 
 export default class UserRow extends React.Component {
-	userInBuilding( buildingId ) {
-		const isUserInBuilding = this.props.user.buildingId === buildingId;
-		const newBuildingId = isUserInBuilding ? null : buildingId;
-		return (
-			<td
-				onClick={
-					() => {
-						this.props.changeBuilding( this.props.user.id, newBuildingId );
-					}
-				}
-			>
-				{isUserInBuilding ? "✅" : "❌"}
-			</td>
-		);
-	}
-
 	renderDeleteButton( userId ) {
 		if ( this.props.adminLoggedIn ) {
+			const StyledWastebin = stylify( Wastebin);
 			return(
-				<td>
-					<button onClick={ () => this.props.deleteUser( userId ) }>
-						🗑️
-					</button>
-				</td>
+				<StyledTd>
+					<StyledButton onClick={ () => this.props.deleteUser( userId ) }>
+						<StyledWastebin/>
+					</StyledButton>
+				</StyledTd>
 			);
 		}
 	}
 
 	render() {
-		const user = this.props.user;
+		const { user, changeBuilding } = this.props;
 		return (
 			<tr>
 				<td>{user.firstName + " " + user.lastName}</td>
-				{this.userInBuilding( 1 )}
-				{this.userInBuilding( 2 )}
-				{this.userInBuilding( 3 )}
-				{this.userInBuilding( 4 )}
-				{this.userInBuilding( null )}
-				{
-					this.renderDeleteButton( user.id )
-				}
+				<PresenceSwitch building={1} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={2} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={3} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={4} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={null} user={user} changeBuilding={changeBuilding} />
+
+				{this.renderDeleteButton( user.id )}
 			</tr>
 		);
 	}
