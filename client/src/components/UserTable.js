@@ -1,5 +1,12 @@
 import React, { Fragment } from "react";
 import UserRow from "./UserRow";
+import styled from "styled-components";
+
+const StyledThread = styled.thead`
+  	font-size: 1em;
+  	border-radius: 10px;
+  	text-align: center;
+`;
 
 export default class UserTable extends React.Component {
 	constructor() {
@@ -32,16 +39,13 @@ export default class UserTable extends React.Component {
 			<Fragment>
 				<div>
 					<table className="user-table" >
-						<thead>
+						<StyledThread>
 						<tr>
 							<th>Name</th>
-							<th>1</th>
-							<th>2</th>
-							<th>3</th>
-							<th>4</th>
-							<th>🏝</th>
+							<th colspan="4">Buildings </th>
+							<th>At home</th>
 						</tr>
-						</thead>
+						</StyledThread>
 						<tbody>
 						{ this.props.users.map( user => (
 							<UserRow

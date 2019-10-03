@@ -1,15 +1,41 @@
 import React from "react";
 import PresenceSwitch from "./PresenceSwitch";
+import { ReactComponent as Wastebin } from "./svg/wastebin.svg";
+import styled from "styled-components";
+
+const StyledTd = styled.td`
+  	font-size: 1em;
+  	border-radius: 10px;
+  	text-align: center;
+`;
+
+const StyledButton = styled.button`
+  	font-size: 1em;
+  	text-align: center;
+  	horizontal-align: center;
+	border-color: transparent;
+	background-color: transparent;
+`;
+
+const stylify = function( image ) {
+	return styled( image )`
+		height: 40px;
+		width: 40px;
+		background-color: transparent;
+		color: gray;
+	`
+};
 
 export default class UserRow extends React.Component {
 	renderDeleteButton( userId ) {
 		if ( this.props.adminLoggedIn ) {
+			const StyledWastebin = stylify( Wastebin);
 			return(
-				<td>
-					<button onClick={ () => this.props.deleteUser( userId ) }>
-						🗑️
-					</button>
-				</td>
+				<StyledTd>
+					<StyledButton onClick={ () => this.props.deleteUser( userId ) }>
+						<StyledWastebin/>
+					</StyledButton>
+				</StyledTd>
 			);
 		}
 	}
