@@ -42,7 +42,7 @@ export default class UserTable extends React.Component {
 						<StyledThread>
 						<tr>
 							<th>Name</th>
-							<th colspan="4">Buildings </th>
+							<th colSpan="4">Buildings </th>
 							<th>At home</th>
 						</tr>
 						</StyledThread>
