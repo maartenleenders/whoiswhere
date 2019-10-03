@@ -1,22 +1,7 @@
 import React from "react";
+import PresenceSwitch from "./PresenceSwitch";
 
 export default class UserRow extends React.Component {
-	userInBuilding( buildingId ) {
-		const isUserInBuilding = this.props.user.buildingId === buildingId;
-		const newBuildingId = isUserInBuilding ? null : buildingId;
-		return (
-			<td
-				onClick={
-					() => {
-						this.props.changeBuilding( this.props.user.id, newBuildingId );
-					}
-				}
-			>
-				{isUserInBuilding ? "✅" : "❌"}
-			</td>
-		);
-	}
-
 	renderDeleteButton( userId ) {
 		if ( this.props.adminLoggedIn ) {
 			return(
@@ -30,18 +15,17 @@ export default class UserRow extends React.Component {
 	}
 
 	render() {
-		const user = this.props.user;
+		const { user, changeBuilding } = this.props;
 		return (
 			<tr>
 				<td>{user.firstName + " " + user.lastName}</td>
-				{this.userInBuilding( 1 )}
-				{this.userInBuilding( 2 )}
-				{this.userInBuilding( 3 )}
-				{this.userInBuilding( 4 )}
-				{this.userInBuilding( null )}
-				{
-					this.renderDeleteButton( user.id )
-				}
+				<PresenceSwitch building={1} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={2} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={3} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={4} user={user} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={null} user={user} changeBuilding={changeBuilding} />
+
+				{this.renderDeleteButton( user.id )}
 			</tr>
 		);
 	}
