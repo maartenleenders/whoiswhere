@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  nestjs:
+    image: zeepje/whoiswhere:latest
+    build: .
+  db:
+    image: mysql:5
