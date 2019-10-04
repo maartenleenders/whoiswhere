@@ -12,8 +12,7 @@ import io from "socket.io-client";
 import socketActions from "./redux/middleware/socketActions";
 
 
-// const socket = io( "http://localhost:3000" );
-const socket = io( "http://localhost:1337" );
+const socket = io( "http://localhost:3000" );
 
 const middleWare = [ thunk, socketActions( socket ) ];
 const store = createStore(

@@ -1,10 +1,5 @@
 version: "3.7"
 services:
-  nestjs:
-    image: zeepje/whoiswhere:latest
-    build: .
-    ports:
-      - "1337:3000"
   whoiswhere-mysql:
     image: mysql:5
     ports:
@@ -12,3 +7,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: whoiswhere
+    volumes:
+      - whoiswhere-datavolume:/var/lib/mysql
+  nestjs:
+    image: zeepje/whoiswhere:latest
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - whoiswhere-mysql
+volumes:
+  whoiswhere-datavolume:
