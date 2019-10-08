@@ -12,6 +12,8 @@ $ cd client
 $ yarn && yarn start
 ```
 
+You can see the app running at `http://localhost:3001`
+
 Enjoy!
 
 ##
