@@ -16,5 +16,9 @@ services:
       - "3000:3000"
     depends_on:
       - whoiswhere-mysql
+    volumes:
+      - .:/usr/src/service
+    working_dir: /usr/src/service
+    command: yarn start:dev
 volumes:
   whoiswhere-datavolume:
