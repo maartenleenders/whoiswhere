@@ -4,12 +4,12 @@
 	width: 100%;
 }
 
-.user-table {
+.employee-table {
 	background-color: lightcyan;
 	margin: 0 auto;
 }
 
-.add-user {
+.add-employee {
 	display: flex;
 	flex-direction: column;
 	max-width: 25%;
@@ -19,11 +19,11 @@
 	padding: 8px;
 }
 
-.add-user input {
+.add-employee input {
 	padding: 8px;
 }
 
-.user-table th, td {
+.employee-table th, td {
 	padding: 8px;
 }
 

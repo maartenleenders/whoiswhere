@@ -55,17 +55,17 @@ const styledBuildingsSvg = [
 export default class PresenceSwitch extends React.Component {
 	render() {
 		const buildingId = this.props.building;
-		const isUserInBuilding = this.props.user.buildingId === buildingId;
-		const newBuildingId = isUserInBuilding ? null : buildingId;
+		const isEmployeeInBuilding = this.props.employee.buildingId === buildingId;
+		const newBuildingId = isEmployeeInBuilding ? null : buildingId;
 
 		const StyledBuildingSvg = styledBuildingsSvg[ buildingId || 0 ];
-		if ( isUserInBuilding ) {
+		if ( isEmployeeInBuilding ) {
 			const EnteredSvg = entered( StyledBuildingSvg, buildingColors[ buildingId || 0 ] );
 			return (
 				<StyledTd
 					onClick={
 						() => {
-							this.props.changeBuilding( this.props.user.id, newBuildingId );
+							this.props.changeBuilding( this.props.employee.id, newBuildingId );
 						}
 					}
 				>
@@ -79,7 +79,7 @@ export default class PresenceSwitch extends React.Component {
 			<StyledTd
 				onClick={
 					() => {
-						this.props.changeBuilding( this.props.user.id, newBuildingId );
+						this.props.changeBuilding( this.props.employee.id, newBuildingId );
 					}
 				}
 			>

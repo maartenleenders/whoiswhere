@@ -4,64 +4,64 @@ import {
     WebSocketServer,
 } from '@nestjs/websockets';
 import {Client, Server} from 'socket.io';
-import {UserService} from "../user/user.service";
+import {EmployeeService} from "../employees/employee.service";
 import {
-    NewUserRequestAction,
-    RetrieveUsersAction,
-    UpdateUserBuildingAction,
-    DeleteUserRequestAction,
-    NEW_USER_CREATED,
-    RETRIEVE_USERS,
-    UPDATE_USER_BUILDING,
-    INCOMING_USERS,
-    DELETE_USER_REQUEST,
-    DELETE_USER_SUCCESS,
-    NEW_USER_REQUEST,
+    NewEmployeeRequestAction,
+    RetrieveEmployeesAction,
+    UpdateEmployeeBuildingAction,
+    DeleteEmployeeRequestAction,
+    NEW_EMPLOYEE_CREATED,
+    RETRIEVE_EMPLOYEES,
+    UPDATE_EMPLOYEE_BUILDING,
+    INCOMING_EMPLOYEES,
+    DELETE_EMPLOYEE_REQUEST,
+    DELETE_EMPLOYEE_SUCCESS,
+    NEW_EMPLOYEE_REQUEST,
 } from "../types/reduxTypes";
 
 @WebSocketGateway()
 export class EventsGateway {
     constructor(
-        private readonly userService: UserService,
+        private readonly employeeService: EmployeeService,
     ) {
     }
 
     @WebSocketServer()
     server: Server;
 
-    @SubscribeMessage(RETRIEVE_USERS)
-    async retrieveUsers(client: Client, action: RetrieveUsersAction) {
-        const users = await this.userService.getAll();
-        client.emit("serverReduxAction", {type: INCOMING_USERS, users});
+    @SubscribeMessage(RETRIEVE_EMPLOYEES)
+    async retrieveEmployees(client: Client, action: RetrieveEmployeesAction) {
+        const employees = await this.employeeService.getAll();
+        client.emit("serverReduxAction", {type: INCOMING_EMPLOYEES, employees});
     }
 
-    @SubscribeMessage(UPDATE_USER_BUILDING)
-    async updateUserBuilding(client: Client, action: UpdateUserBuildingAction) {
-        console.log( "serverside updateuserbuilding:", action );
-        await this.userService.setBuilding(action.userId, action.buildingId);
+    @SubscribeMessage(UPDATE_EMPLOYEE_BUILDING)
+    async updateEmployeeBuilding(client: Client, action: UpdateEmployeeBuildingAction) {
+        console.log( "serverside updateemployeebuilding:", action );
+        await this.employeeService.setBuilding(action.employeeId, action.buildingId);
         client.broadcast.emit("serverReduxAction", {
-                type: UPDATE_USER_BUILDING,
-                userId: action.userId,
+                type: UPDATE_EMPLOYEE_BUILDING,
+                employeeId: action.employeeId,
                 buildingId: action.buildingId,
             },
         );
     }
 
-    @SubscribeMessage(NEW_USER_REQUEST)
-    async createUser(client: Client, action: NewUserRequestAction) {
-        const user = await this.userService.create(action.user);
+    @SubscribeMessage(NEW_EMPLOYEE_REQUEST)
+    async createEmployee(client: Client, action: NewEmployeeRequestAction) {
+        const employee = await this.employeeService.create(action.employee);
         this.server.emit("serverReduxAction", {
-            type: NEW_USER_CREATED,
-            user,
+            type: NEW_EMPLOYEE_CREATED,
+            employee,
         });
     }
 
-    @SubscribeMessage(DELETE_USER_REQUEST)
-    async deleteUser(client: Client, action: DeleteUserRequestAction) {
-        await this.userService.delete(action.userId);
+    @SubscribeMessage(DELETE_EMPLOYEE_REQUEST)
+    async deleteEmployee(client: Client, action: DeleteEmployeeRequestAction) {
+        await this.employeeService.delete(action.employeeId);
         this.server.emit("serverReduxAction", {
-            type: DELETE_USER_SUCCESS,
-            userId: action.userId,
+            type: DELETE_EMPLOYEE_SUCCESS,
+            employeeId: action.employeeId,
         } );
     }
 }

@@ -1,20 +1,20 @@
 import React, { Fragment } from "react";
-import UserRow from "./UserRow";
+import EmployeeRow from "./EmployeeRow";
 import styled from "styled-components";
 
-const StyledThread = styled.thead`
+const StyledThread = styled.th`
   	font-size: 1em;
   	border-radius: 10px;
   	text-align: center;
 `;
 
-export default class UserTable extends React.Component {
+export default class EmployeeTable extends React.Component {
 	constructor() {
 		super();
 	}
 
 	componentDidMount() {
-		this.props.getUsers();
+		this.props.getEmployees();
 	}
 
 	renderAdminOptions() {
@@ -24,7 +24,7 @@ export default class UserTable extends React.Component {
 					className="button-area"
 				>
 					<button
-						onClick={ () => this.props.goTo( "new-user" ) }
+						onClick={ () => this.props.goTo( "new-employee" ) }
 					>
 						Add friend!
 					</button>
@@ -38,7 +38,7 @@ export default class UserTable extends React.Component {
 		return (
 			<Fragment>
 				<div>
-					<table className="user-table" >
+					<table className="employee-table" >
 						<StyledThread>
 						<tr>
 							<th>Name</th>
@@ -47,12 +47,12 @@ export default class UserTable extends React.Component {
 						</tr>
 						</StyledThread>
 						<tbody>
-						{ this.props.users.map( user => (
-							<UserRow
-								key={user.id}
-								user={user}
+						{ this.props.employees.map( employee => (
+							<EmployeeRow
+								key={employee.id}
+								employee={employee}
 								changeBuilding={ this.props.changeBuilding }
-								deleteUser={ this.props.deleteUser }
+								deleteEmployee={ this.props.deleteEmployee }
 								adminLoggedIn={ this.props.adminLoggedIn }
 							/>
 						) ) }

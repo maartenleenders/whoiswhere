@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import UserTableContainer from "./containers/UserTableContainer";
-import NewUserContainer from "./containers/NewUserContainer";
+import EmployeeTableContainer from "./containers/EmployeeTableContainer";
+import NewEmployeeContainer from "./containers/NewEmployeeContainer";
 
 class App extends Component {
-	state = { page: "users" };
+	state = { page: "employees" };
 
 	getContent() {
 		switch( this.state.page ) {
-			case "new-user":
-				return <NewUserContainer
+			case "new-employee":
+				return <NewEmployeeContainer
 					goTo={ ( page ) => this.setState( { page } ) }
 
 				/>;
-			case "users":
+			case "employees":
 			default:
-				return <UserTableContainer
+				return <EmployeeTableContainer
 					goTo={ ( page ) => this.setState( { page } ) }
 				/>
 		}

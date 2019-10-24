@@ -1,6 +1,6 @@
 import React  from "react";
 
-export default class NewUser extends React.Component {
+export default class NewEmployee extends React.Component {
 	constructor() {
 		super();
 	}
@@ -13,7 +13,7 @@ export default class NewUser extends React.Component {
 	render() {
 		return (
 			<div
-				className="add-user"
+				className="add-employee"
 			>
 				<label htmlFor="firstName">First name:</label>
 				<input name="firstName" value={ this.state.firstName } onChange={ event => this.setState( { firstName: event.target.value } ) } />
@@ -27,11 +27,11 @@ export default class NewUser extends React.Component {
 					className="button-area"
 				>
 					<button
-						onClick={ () => this.props.goTo( "users" ) }
+						onClick={ () => this.props.goTo( "employees" ) }
 					>
 						Go back
 					</button>
-					<button onClick={ () => this.props.newUser( this.state.firstName, this.state.lastName ) }>
+					<button onClick={ () => this.props.newEmployee( this.state.firstName, this.state.lastName ) }>
 						Submit
 					</button>
 				</div>

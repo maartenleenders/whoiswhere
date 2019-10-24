@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from 'typ
 import {Building} from "../buildings/building.entity";
 
 @Entity()
-export class User {
+export class Employee {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -16,7 +16,7 @@ export class User {
     @Column( {nullable: true} )
     buildingId: number;
 
-    @ManyToOne( type => Building, building => building.users )
+    @ManyToOne( type => Building, building => building.employees )
     @JoinColumn({ name: "buildingId" })
     building: Building;
 }

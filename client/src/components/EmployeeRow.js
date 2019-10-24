@@ -26,13 +26,13 @@ const stylify = function( image ) {
 	`
 };
 
-export default class UserRow extends React.Component {
-	renderDeleteButton( userId ) {
+export default class EmployeeRow extends React.Component {
+	renderDeleteButton( employeeId ) {
 		if ( this.props.adminLoggedIn ) {
 			const StyledWastebin = stylify( Wastebin);
 			return(
 				<StyledTd>
-					<StyledButton onClick={ () => this.props.deleteUser( userId ) }>
+					<StyledButton onClick={ () => this.props.deleteEmployee( employeeId ) }>
 						<StyledWastebin/>
 					</StyledButton>
 				</StyledTd>
@@ -41,17 +41,17 @@ export default class UserRow extends React.Component {
 	}
 
 	render() {
-		const { user, changeBuilding } = this.props;
+		const { employee, changeBuilding } = this.props;
 		return (
 			<tr>
-				<td>{user.firstName + " " + user.lastName}</td>
-				<PresenceSwitch building={1} user={user} changeBuilding={changeBuilding} />
-				<PresenceSwitch building={2} user={user} changeBuilding={changeBuilding} />
-				<PresenceSwitch building={3} user={user} changeBuilding={changeBuilding} />
-				<PresenceSwitch building={4} user={user} changeBuilding={changeBuilding} />
-				<PresenceSwitch building={null} user={user} changeBuilding={changeBuilding} />
+				<td>{employee.firstName + " " + employee.lastName}</td>
+				<PresenceSwitch building={1} employee={employee} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={2} employee={employee} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={3} employee={employee} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={4} employee={employee} changeBuilding={changeBuilding} />
+				<PresenceSwitch building={null} employee={employee} changeBuilding={changeBuilding} />
 
-				{this.renderDeleteButton( user.id )}
+				{this.renderDeleteButton( employee.id )}
 			</tr>
 		);
 	}

@@ -1,14 +1,14 @@
 import { combineReducers } from "redux";
-import { usersAllIdsReducer, usersByIdReducer } from "./usersReducer";
+import { employeesAllIdsReducer, employeesByIdReducer } from "./employeesReducer";
 import { uiReducer } from "./uiReducer";
 
-const usersReducer = combineReducers( {
-	byId: usersByIdReducer,
-	allIds: usersAllIdsReducer,
+const employeesReducer = combineReducers( {
+	byId: employeesByIdReducer,
+	allIds: employeesAllIdsReducer,
 } );
 
 const entitiesReducer = combineReducers( {
-	users: usersReducer,
+	employees: employeesReducer,
 } );
 
 const rootReducer = combineReducers( {

@@ -1,5 +1,5 @@
 import {Entity, PrimaryColumn, Column, OneToMany} from 'typeorm';
-import {User} from "../user/user.entity";
+import {Employee} from "../employees/employee.entity";
 
 @Entity()
 export class Building {
@@ -16,6 +16,6 @@ export class Building {
     @Column()
     theme: string;
 
-    @OneToMany( type => User, user => user.building )
-    users: User[];
+    @OneToMany( type => Employee, employee => employee.building )
+    employees: Employee[];
 }
