@@ -8,11 +8,11 @@ import { ReactComponent as Building4Svg } from "./svg/building4.svg";
 import { ReactComponent as HouseSvg } from "./svg/house.svg";
 
 const buildingColors = [
-	colors.$palette_green,
+	colors.$color_grey_disabled,
 	colors.$color_pink_dark,
+	colors.$palette_green_medium,
+	colors.$palette_orange_light,
 	colors.$color_blue,
-	colors.$palette_red,
-	colors.$color_orange,
 ];
 
 const StyledTd = styled.td`
@@ -29,18 +29,18 @@ const stylify = function( image ) {
 	`
 };
 
-const entered = function( image, color ) {
+const present = function( image, color ) {
 	return styled( image )`
 		color: white;
 		background-color: ${color};
 	`
 };
 
-const left = function( image, color ) {
+const absent = function( image, color ) {
 	return styled( image )`
 		color: ${color};
 		background-color: white;
-		opacity: 0.6;
+		opacity: 0.2;
 	`
 };
 
@@ -53,28 +53,31 @@ const styledBuildingsSvg = [
 ];
 
 export default class PresenceSwitch extends React.Component {
+	constructor( props ) {
+		super( props );
+
+		this.isEmployeePresent = this.isEmployeePresent.bind( this );
+		this.building = this.props.building;
+	}
+
+	isEmployeePresent() {
+		return this.props.employee.buildingId === this.props.building;
+	}
+
+	generatePresenceIcon() {
+		const buildingIcon = styledBuildingsSvg[ this.building || 0 ];
+		const buildingColor = buildingColors[ this.building || 0 ];
+		return this.isEmployeePresent()
+			? present( buildingIcon, buildingColor )
+			: absent( buildingIcon, buildingColor );
+	}
+
 	render() {
 		const buildingId = this.props.building;
 		const isEmployeeInBuilding = this.props.employee.buildingId === buildingId;
 		const newBuildingId = isEmployeeInBuilding ? null : buildingId;
+		const PresenceIcon = this.generatePresenceIcon();
 
-		const StyledBuildingSvg = styledBuildingsSvg[ buildingId || 0 ];
-		if ( isEmployeeInBuilding ) {
-			const EnteredSvg = entered( StyledBuildingSvg, buildingColors[ buildingId || 0 ] );
-			return (
-				<StyledTd
-					onClick={
-						() => {
-							this.props.changeBuilding( this.props.employee.id, newBuildingId );
-						}
-					}
-				>
-					<EnteredSvg />
-				</StyledTd>
-			);
-		}
-
-		const LeftSvg = left( StyledBuildingSvg, buildingColors[ buildingId || 0 ] );
 		return (
 			<StyledTd
 				onClick={
@@ -83,9 +86,8 @@ export default class PresenceSwitch extends React.Component {
 					}
 				}
 			>
-				<LeftSvg />
+				<PresenceIcon />
 			</StyledTd>
 		);
-
 	}
 }

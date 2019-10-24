@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import EmployeeRow from "./EmployeeRow";
 import styled from "styled-components";
 
-const StyledThread = styled.th`
+const TableHead = styled.thead`
   	font-size: 1em;
   	border-radius: 10px;
   	text-align: center;
@@ -39,13 +39,13 @@ export default class EmployeeTable extends React.Component {
 			<Fragment>
 				<div>
 					<table className="employee-table" >
-						<StyledThread>
-						<tr>
-							<th>Name</th>
-							<th colSpan="4">Buildings </th>
-							<th>At home</th>
-						</tr>
-						</StyledThread>
+						<TableHead>
+							<tr>
+								<th>Name</th>
+								<th colSpan="4">Building</th>
+								<th>At home</th>
+							</tr>
+						</TableHead>
 						<tbody>
 						{ this.props.employees.map( employee => (
 							<EmployeeRow

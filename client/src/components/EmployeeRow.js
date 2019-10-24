@@ -26,10 +26,11 @@ const stylify = function( image ) {
 	`
 };
 
+const StyledWastebin = stylify( Wastebin);
+
 export default class EmployeeRow extends React.Component {
 	renderDeleteButton( employeeId ) {
 		if ( this.props.adminLoggedIn ) {
-			const StyledWastebin = stylify( Wastebin);
 			return(
 				<StyledTd>
 					<StyledButton onClick={ () => this.props.deleteEmployee( employeeId ) }>
