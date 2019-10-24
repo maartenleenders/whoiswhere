@@ -1,7 +1,7 @@
 import { TOGGLE_ADMIN_OPTIONS } from "../actions/ui";
 
 const initialState = {
-	adminLoggedIn: true,
+	adminLoggedIn: false,
 };
 
 export function uiReducer( state = initialState, action ) {

@@ -1,4 +1,16 @@
 import React  from "react";
+import styled from "styled-components";
+import { Button, ButtonArea } from "./Button";
+
+const StyledContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	max-width: 25%;
+	background-color: lightcyan;
+	margin: 0 auto;
+	justify-content: center;
+	padding: 8px;
+`;
 
 export default class NewEmployee extends React.Component {
 	constructor() {
@@ -12,9 +24,7 @@ export default class NewEmployee extends React.Component {
 
 	render() {
 		return (
-			<div
-				className="add-employee"
-			>
+			<StyledContainer>
 				<label htmlFor="firstName">First name:</label>
 				<input name="firstName" value={ this.state.firstName } onChange={ event => this.setState( { firstName: event.target.value } ) } />
 				<br />
@@ -23,19 +33,17 @@ export default class NewEmployee extends React.Component {
 				<input name="lastName" value={ this.state.lastName } onChange={ event => this.setState( { lastName: event.target.value } ) } />
 				<br />
 
-				<div
-					className="button-area"
-				>
-					<button
+				<ButtonArea>
+					<Button
 						onClick={ () => this.props.goTo( "employees" ) }
 					>
 						Go back
-					</button>
-					<button onClick={ () => this.props.newEmployee( this.state.firstName, this.state.lastName ) }>
+					</Button>
+					<Button onClick={ () => this.props.newEmployee( this.state.firstName, this.state.lastName ) }>
 						Submit
-					</button>
-				</div>
-			</div>
+					</Button>
+				</ButtonArea>
+			</StyledContainer>
 		);
 	}
 }

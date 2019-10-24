@@ -1,11 +1,26 @@
 import React, { Fragment } from "react";
 import EmployeeRow from "./EmployeeRow";
 import styled from "styled-components";
+import { Button, ButtonArea } from "./Button";
+import { colors } from "@yoast/style-guide";
 
 const TableHead = styled.thead`
   	font-size: 1em;
   	border-radius: 10px;
   	text-align: center;
+`;
+
+const TableWrapper = styled.div`
+	width: 100%;
+	background-color: ${ colors.$palette_grey_ultra_light };
+`;
+
+const Table = styled.table`
+	margin: 0 auto;
+`;
+
+const AdminButton = styled.button`
+	float: right;
 `;
 
 export default class EmployeeTable extends React.Component {
@@ -20,15 +35,13 @@ export default class EmployeeTable extends React.Component {
 	renderAdminOptions() {
 		if ( this.props.adminLoggedIn ) {
 			return(
-				<div
-					className="button-area"
-				>
-					<button
+				<ButtonArea>
+					<Button
 						onClick={ () => this.props.goTo( "new-employee" ) }
 					>
 						Add friend!
-					</button>
-				</div>
+					</Button>
+				</ButtonArea>
 			);
 		}
 		return null;
@@ -37,8 +50,8 @@ export default class EmployeeTable extends React.Component {
 	render() {
 		return (
 			<Fragment>
-				<div>
-					<table className="employee-table" >
+				<TableWrapper>
+					<Table>
 						<TableHead>
 							<tr>
 								<th>Name</th>
@@ -57,14 +70,13 @@ export default class EmployeeTable extends React.Component {
 							/>
 						) ) }
 						</tbody>
-					</table>
-					<button
-						className="show-admin-toggle"
+					</Table>
+					<AdminButton
 						onClick={ () => this.props.toggleAdminOptions() }
 					>
 						⚙️
-					</button>
-				</div>
+					</AdminButton>
+				</TableWrapper>
 				{ this.renderAdminOptions() }
 			</Fragment>
 		);
