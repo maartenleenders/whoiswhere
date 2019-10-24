@@ -10,14 +10,17 @@ import {Employee} from "./employees/employee.entity";
 import {Building} from "./buildings/building.entity";
 import {BuildingService} from "./buildings/building.service";
 import {EventsGateway} from './events/events.gateway';
+import {User} from "./users/user.entity";
+import {UserController} from "./users/user.controller";
+import {UserService} from "./users/user.service";
 
 @Module({
   imports: [
       TypeOrmModule.forRoot(),
-      TypeOrmModule.forFeature( [ Employee, Building ] ),
+      TypeOrmModule.forFeature( [ Employee, Building, User ] ),
   ],
-  controllers: [AppController, BuildingController, EmployeeController],
-  providers: [AppService, EmployeeService, BuildingService, EventsGateway],
+  controllers: [AppController, BuildingController, EmployeeController, UserController],
+  providers: [AppService, EmployeeService, BuildingService, UserService, EventsGateway],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}
