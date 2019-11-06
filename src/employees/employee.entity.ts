@@ -16,6 +16,12 @@ export class Employee {
     @Column( {nullable: true} )
     buildingId: number;
 
+    @Column()
+    listOrder: number;
+
+    @Column()
+    isBhv: boolean;
+
     @ManyToOne( type => Building, building => building.employees )
     @JoinColumn({ name: "buildingId" })
     building: Building;

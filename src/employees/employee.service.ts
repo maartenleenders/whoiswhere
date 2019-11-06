@@ -26,6 +26,11 @@ export class EmployeeService {
         return "That went really well!";
     }
 
+    async setListOrder( id, newPosition ) {
+        // get all employees that are further down the list:
+        // this.employeeRepository.find();
+    };
+
     async getAll() {
         return await this.employeeRepository.find();
     }

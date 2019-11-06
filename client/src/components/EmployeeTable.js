@@ -19,7 +19,7 @@ const Table = styled.table`
 	margin: 0 auto;
 `;
 
-const AdminButton = styled.button`
+const AdminButton = styled( Button )`
 	float: right;
 `;
 
@@ -74,7 +74,7 @@ export default class EmployeeTable extends React.Component {
 					<AdminButton
 						onClick={ () => this.props.toggleAdminOptions() }
 					>
-						⚙️
+						Edit
 					</AdminButton>
 				</TableWrapper>
 				{ this.renderAdminOptions() }
