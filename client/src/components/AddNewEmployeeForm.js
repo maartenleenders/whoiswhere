@@ -50,7 +50,7 @@ const defaultState = {
 };
 
 // todo: style the SELECT BOX
-export default class NewEmployeeRow extends React.Component {
+export default class NewEmployeeForm extends React.Component {
 	constructor( props ) {
 		super( props );
 		this.toggleBhv = this.toggleBhv.bind( this );

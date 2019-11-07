@@ -3,7 +3,7 @@ import EmployeeRow from "./EmployeeRow";
 import styled from "styled-components";
 import { Button } from "./Button";
 import { colors } from "@yoast/style-guide";
-import NewEmployeeRow from "./NewEmployeeRow";
+import NewEmployeeForm from "./AddNewEmployeeForm";
 
 const TableHead = styled.thead`
   	font-size: 1em;
@@ -29,10 +29,10 @@ export default class EmployeeTable extends React.Component {
 		this.props.getEmployees();
 	}
 
-	renderNewEmployeeArea( adminLoggedIn, addNewEmployee ) {
+	renderNewEmployeeForm( adminLoggedIn, addNewEmployee ) {
 		if( adminLoggedIn ) {
 			return (
-				<NewEmployeeRow addNewEmployee={ addNewEmployee } />
+				<NewEmployeeForm addNewEmployee={ addNewEmployee } />
 			);
 		}
 	}
@@ -77,7 +77,7 @@ export default class EmployeeTable extends React.Component {
 						</tbody>
 					</Table>
 					{
-						this.renderNewEmployeeArea( this.props.adminLoggedIn, this.props.addNewEmployee )
+						this.renderNewEmployeeForm( this.props.adminLoggedIn, this.props.addNewEmployee )
 					}
 					<AdminButton
 						onClick={ () => this.props.toggleAdminOptions() }
