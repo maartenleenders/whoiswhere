@@ -4,11 +4,31 @@ import { Button } from "./Button";
 import Checkbox from "./Checkbox";
 import Select from "react-select";
 
+const NewEmployeeArea = styled.div`
+	width: 50%;
+	margin: 0 auto;
+`;
 const StyledInput = styled.input`
-	width: 50%%;
+	width: 50%;
+	box-sizing: border-box;
 	height: 2.5em;
 	margin-bottom: 2em;
 `;
+
+// React-select uses a different styling API, so the next bit looks a bit different from styled-components
+const selectStyles = {
+	container: ( provided, state ) => ({
+		...provided,
+		padding: 0,
+		fontSize: "12px",
+		height: "2.5em",
+		marginBottom: "2em",
+	}),
+	control: ( provided, state ) => ({
+		...provided,
+		height: "2.5em",
+	})
+};
 
 const priorityOptions = [
 	{ value: 900, label: "CEO - Marieke" },
@@ -65,44 +85,38 @@ export default class NewEmployeeRow extends React.Component {
 
 	render() {
 		return (
-			<tr>
-				<td>
-					<StyledInput
-						name="firstName"
-						value={ this.state.firstName }
-						onChange={ event => this.setState( { firstName: event.target.value } ) }
-						placeholder="First name"
-					/>
-					<StyledInput
-						name="lastName"
-						value={ this.state.lastName }
-						onChange={ event => this.setState( { lastName: event.target.value } ) }
-						placeholder="Last name"
-					/>
-				</td>
-				<td colSpan={ 4 }>
-					<Select
-						onChange={ event => this.setPriorityAndFunction( event ) }
-						options={ priorityOptions }
-						value={ { value: this.state.priority, label: this.state.function } }
-					/>
-				</td>
-				<td >
-					<Checkbox className={ "test" } label={"BHV"} checked={ this.state.isBhv } onChange={ event => this.toggleBhv( event ) } />
-				</td>
-				<td>
-					<Button
-						onClick={
-							() => {
-								this.props.addNewEmployee( this.composeEmployee() );
-								this.setState( defaultState );
-							}
+			<NewEmployeeArea>
+				<StyledInput
+					name="firstName"
+					value={ this.state.firstName }
+					onChange={ event => this.setState( { firstName: event.target.value } ) }
+					placeholder="First name"
+				/>
+				<StyledInput
+					name="lastName"
+					value={ this.state.lastName }
+					onChange={ event => this.setState( { lastName: event.target.value } ) }
+					placeholder="Last name"
+				/>
+				<Select
+					onChange={ event => this.setPriorityAndFunction( event ) }
+					styles={ selectStyles }
+					options={ priorityOptions }
+					menuPlacement="auto"
+					value={ { value: this.state.priority, label: this.state.function } }
+				/>
+				<Checkbox className={ "test" } label={"BHV"} checked={ this.state.isBhv } onChange={ event => this.toggleBhv( event ) } />
+				<Button
+					onClick={
+						() => {
+							this.props.addNewEmployee( this.composeEmployee() );
+							this.setState( defaultState );
 						}
-					>
-						Submit
-					</Button>
-				</td>
-			</tr>
+					}
+				>
+					Submit
+				</Button>
+			</NewEmployeeArea>
 		);
 	}
 }

@@ -29,7 +29,7 @@ export default class EmployeeTable extends React.Component {
 		this.props.getEmployees();
 	}
 
-	renderNewEmployeeRow( adminLoggedIn, addNewEmployee ) {
+	renderNewEmployeeArea( adminLoggedIn, addNewEmployee ) {
 		if( adminLoggedIn ) {
 			return (
 				<NewEmployeeRow addNewEmployee={ addNewEmployee } />
@@ -74,11 +74,11 @@ export default class EmployeeTable extends React.Component {
 									adminLoggedIn={ this.props.adminLoggedIn }
 								/>
 							) ) }
-							{
-								this.renderNewEmployeeRow( this.props.adminLoggedIn, this.props.addNewEmployee )
-							}
 						</tbody>
 					</Table>
+					{
+						this.renderNewEmployeeArea( this.props.adminLoggedIn, this.props.addNewEmployee )
+					}
 					<AdminButton
 						onClick={ () => this.props.toggleAdminOptions() }
 					>
