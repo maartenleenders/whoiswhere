@@ -26,6 +26,7 @@ const defaultState = {
 	lastName: "",
 	isBhv: false,
 	priority: 10,
+	function: "Employee"
 };
 
 // todo: style the SELECT BOX
@@ -33,7 +34,7 @@ export default class NewEmployeeRow extends React.Component {
 	constructor( props ) {
 		super( props );
 		this.toggleBhv = this.toggleBhv.bind( this );
-		this.setPriority = this.setPriority.bind( this );
+		this.setPriorityAndFunction = this.setPriorityAndFunction.bind( this );
 		this.composeEmployee = this.composeEmployee.bind( this );
 	}
 
@@ -45,15 +46,19 @@ export default class NewEmployeeRow extends React.Component {
 		} );
 	}
 
-	setPriority( event ) {
+	setPriorityAndFunction( event ) {
 		this.setState( {
 			priority: event.value,
+			function: event.label,
 		} );
 	}
 
 	composeEmployee() {
+		const { firstName, lastName, isBhv } = this.state;
 		return {
-			...this.state,
+			firstName,
+			lastName,
+			isBhv,
 			priority: this.state.isBhv ? this.state.priority + 1 : this.state.priority
 		}
 	}
@@ -77,9 +82,9 @@ export default class NewEmployeeRow extends React.Component {
 				</td>
 				<td colSpan={ 4 }>
 					<Select
-						onChange={ event => this.setPriority( event ) }
+						onChange={ event => this.setPriorityAndFunction( event ) }
 						options={ priorityOptions }
-						defaultValue={ { value: 10, label: "Employee" } }
+						value={ { value: this.state.priority, label: this.state.function } }
 					/>
 				</td>
 				<td >

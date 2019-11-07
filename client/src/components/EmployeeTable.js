@@ -39,7 +39,15 @@ export default class EmployeeTable extends React.Component {
 
 	sortEmployeesByPriority( employees ) {
 		return employees.sort( ( a, b ) => {
-			return b.priority - a.priority;
+			// First, sort by priority (higher priority goes first).
+			let sorter = b.priority - a.priority;
+
+			// If priority is equal, sort by first name.
+			if ( sorter === 0 ) {
+				const toGoFirst = [ a.firstName, b.firstName ].sort()[ 0 ];
+				sorter = toGoFirst === a.firstName ? -1 : 1;
+			}
+			return sorter;
 		} )
 	}
 
