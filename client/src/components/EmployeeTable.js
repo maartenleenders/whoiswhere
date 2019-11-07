@@ -24,10 +24,6 @@ const AdminButton = styled( Button )`
 `;
 
 export default class EmployeeTable extends React.Component {
-	constructor() {
-		super();
-	}
-
 	componentDidMount() {
 		this.props.getEmployees();
 	}

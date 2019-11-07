@@ -11,11 +11,12 @@ const InputArea = styled.div`
 	margin: 0 auto;
 	justify-content: center;
 	padding: 8px;
+	font-size: 12px;
 `;
 
 const StyledInput = styled.input`
 	width: 100%;
-	height: 3em;
+	height: 2em;
 `;
 
 const Page = styled.div`
@@ -27,6 +28,7 @@ export default class NewEmployee extends React.Component {
 	constructor() {
 		super();
 		this.toggleBhv = this.toggleBhv.bind( this );
+		this.setPriority = this.setPriority.bind( this );
 	}
 
 	state = {
@@ -42,21 +44,37 @@ export default class NewEmployee extends React.Component {
 		} );
 	}
 
+	setPriority( event ) {
+		this.setState( {
+			priority: event.target.value,
+		} );
+	}
+
 	render() {
 		return (
 			<Page>
 				<InputArea>
 					<label htmlFor="firstName">First name:</label>
 					<StyledInput name="firstName" value={ this.state.firstName } onChange={ event => this.setState( { firstName: event.target.value } ) } />
-					<br />
 
 					<label htmlFor="lastName">Last name:</label>
 					<StyledInput name="lastName" value={ this.state.lastName } onChange={ event => this.setState( { lastName: event.target.value } ) } />
-					<br />
 
-					<label htmlFor="priority">Priority on list:</label>
+
+					<label htmlFor="function">Priority based on function:</label>
+					<select onChange={ ( event ) => this.setPriority( event )}>
+						<option value={999}>CEO</option>
+						<option value={998}>CPO</option>
+						<option value={997}>COO</option>
+						<option value={996}>CTO</option>
+						<option value={100}>MT</option>
+						<option value={10}>Employee</option>
+						<option value={1}>Intern</option>
+						<option value={0}>Eyes & Ears</option>
+					</select>
+
+					<label htmlFor="priority">Custom priority: (optional)</label>
 					<StyledInput type="number" name="priority" value={ this.state.priority } onChange={ event => this.setState( { priority: event.target.value } ) } />
-					<br />
 
 					<Checkbox className={ "test" } label={"BHV"} checked={ this.state.isBhv } onChange={ event => this.toggleBhv( event ) } />
 
