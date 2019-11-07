@@ -6,14 +6,10 @@ import styled from "styled-components";
 
 const StyledTd = styled.td`
 	font-size: 1em;
-	border-radius: 10px;
 	text-align: left;
-`;
-
-const NameBadge = styled.span`
-	height: 40px;
-	margin-right: 8px;
+	padding: 0 16px;
 	vertical-align: middle;
+	margin-right: 8px;
 `;
 
 const StyledButton = styled.button`
@@ -57,7 +53,7 @@ export default class EmployeeRow extends React.Component {
 		const badge = employee.isBhv ? <StyledBhv /> : null;
 		return (
 			<tr>
-				<StyledTd><NameBadge>{`${ employee.firstName } ${ employee.lastName } `}{ badge }</NameBadge></StyledTd>
+				<StyledTd isBhv={ employee.isBhv }>{`${ employee.firstName } ${ employee.lastName } `}{ badge }</StyledTd>
 				<PresenceSwitch building={1} employee={employee} changeBuilding={changeBuilding} />
 				<PresenceSwitch building={2} employee={employee} changeBuilding={changeBuilding} />
 				<PresenceSwitch building={3} employee={employee} changeBuilding={changeBuilding} />

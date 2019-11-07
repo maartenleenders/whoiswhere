@@ -61,7 +61,7 @@ export default class EmployeeTable extends React.Component {
 							<tr>
 								<th>Name</th>
 								<th colSpan="4">Building</th>
-								<th>At home</th>
+								<th>Away</th>
 							</tr>
 						</TableHead>
 						<tbody>
