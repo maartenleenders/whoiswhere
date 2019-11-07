@@ -12,6 +12,7 @@ const StyledTd = styled.td`
 
 const NameBadge = styled.span`
 	height: 40px;
+	margin-right: 8px;
 	vertical-align: middle;
 `;
 

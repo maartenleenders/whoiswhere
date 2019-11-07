@@ -30,13 +30,14 @@ const CustomLabel = styled.label`
 	display: block;
 	position: relative;
 	padding-left: 35px;
-	margin-bottom: 12px;
 	cursor: pointer;
-	font-size: 22px;
+	height: 32px;
+	font-size: 12px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+
 
 	input {
 		position: absolute;
@@ -63,7 +64,7 @@ const CustomLabel = styled.label`
 const Checkbox = ( props ) => {
 	return(
 		<CustomLabel>
-			{ props.label }
+			<span>{ props.label }</span>
 			<input type="checkbox" { ...props } />
 			<Checkmark className={ props.className } />
 		</CustomLabel>

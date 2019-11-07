@@ -1,6 +1,11 @@
 import { connect } from "react-redux";
 import EmployeeTable from "../components/EmployeeTable";
-import { deleteEmployeeRequest, retrieveEmployees, updateEmployeeBuilding } from "../redux/actions/employees";
+import {
+	deleteEmployeeRequest,
+	newEmployeeRequest,
+	retrieveEmployees,
+	updateEmployeeBuilding
+} from "../redux/actions/employees";
 import { toggleAdminOptions } from "../redux/actions/ui";
 
 function mapStateToProps( state ) {
@@ -19,6 +24,7 @@ function mapDispatchToProps( dispatch ) {
 		getEmployees: () => dispatch( retrieveEmployees() ),
 		deleteEmployee: ( employeeId ) => dispatch( deleteEmployeeRequest( employeeId ) ),
 		toggleAdminOptions: () => dispatch( toggleAdminOptions() ),
+		addNewEmployee: ( employeeData ) => dispatch( newEmployeeRequest( employeeData ) ),
 	}
 }
 

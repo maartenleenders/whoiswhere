@@ -33,6 +33,7 @@ const present = function( image, color ) {
 	return styled( image )`
 		color: white;
 		background-color: ${color};
+		border: black 1px;
 	`
 };
 
@@ -41,6 +42,8 @@ const absent = function( image, color ) {
 		color: ${color};
 		background-color: white;
 		opacity: 0.2;
+		border: 1px solid;
+		border-color: grey;
 	`
 };
 

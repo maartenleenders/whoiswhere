@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import EmployeeRow from "./EmployeeRow";
 import styled from "styled-components";
-import { Button, ButtonArea } from "./Button";
+import { Button } from "./Button";
 import { colors } from "@yoast/style-guide";
+import NewEmployeeRow from "./NewEmployeeRow";
 
 const TableHead = styled.thead`
   	font-size: 1em;
@@ -28,22 +29,22 @@ export default class EmployeeTable extends React.Component {
 		this.props.getEmployees();
 	}
 
-	renderAdminOptions() {
-		if ( this.props.adminLoggedIn ) {
-			return(
-				<ButtonArea>
-					<Button
-						onClick={ () => this.props.goTo( "new-employee" ) }
-					>
-						Add friend!
-					</Button>
-				</ButtonArea>
+	renderNewEmployeeRow( adminLoggedIn, addNewEmployee ) {
+		if( adminLoggedIn ) {
+			return (
+				<NewEmployeeRow addNewEmployee={ addNewEmployee } />
 			);
 		}
-		return null;
+	}
+
+	sortEmployeesByPriority( employees ) {
+		return employees.sort( ( a, b ) => {
+			return b.priority - a.priority;
+		} )
 	}
 
 	render() {
+		const sortedEmployees = this.sortEmployeesByPriority( this.props.employees );
 		return (
 			<Fragment>
 				<TableWrapper>
@@ -56,15 +57,18 @@ export default class EmployeeTable extends React.Component {
 							</tr>
 						</TableHead>
 						<tbody>
-						{ this.props.employees.map( employee => (
-							<EmployeeRow
-								key={employee.id}
-								employee={employee}
-								changeBuilding={ this.props.changeBuilding }
-								deleteEmployee={ this.props.deleteEmployee }
-								adminLoggedIn={ this.props.adminLoggedIn }
-							/>
-						) ) }
+							{ sortedEmployees.map( employee => (
+								<EmployeeRow
+									key={employee.id}
+									employee={employee}
+									changeBuilding={ this.props.changeBuilding }
+									deleteEmployee={ this.props.deleteEmployee }
+									adminLoggedIn={ this.props.adminLoggedIn }
+								/>
+							) ) }
+							{
+								this.renderNewEmployeeRow( this.props.adminLoggedIn, this.props.addNewEmployee )
+							}
 						</tbody>
 					</Table>
 					<AdminButton
@@ -73,7 +77,6 @@ export default class EmployeeTable extends React.Component {
 						Edit
 					</AdminButton>
 				</TableWrapper>
-				{ this.renderAdminOptions() }
 			</Fragment>
 		);
 	}

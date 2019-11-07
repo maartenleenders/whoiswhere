@@ -14,9 +14,3 @@ export const Button = styled.button`
 	text-align: center;
 	margin: 4px;
 `;
-
-export const ButtonArea = styled.div`
-	display: flex;
-	max-width: 100%;
-	justify-content: center;
-`;
