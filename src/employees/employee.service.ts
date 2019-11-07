@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {Employee} from "./employee.entity";
-import {Repository} from "typeorm";
+import {MoreThanOrEqual, Repository} from "typeorm";
 
 @Injectable()
 export class EmployeeService {
@@ -14,6 +14,8 @@ export class EmployeeService {
         const employee = new Employee();
         employee.firstName = employeeData.firstName;
         employee.lastName = employeeData.lastName;
+        employee.isBhv = employeeData.isBhv || false;
+        employee.priority = employeeData.priority || 10;
         return await this.employeeRepository.save( employee );
     }
 
@@ -26,16 +28,24 @@ export class EmployeeService {
         return "That went really well!";
     }
 
-    async setListOrder( id, newPosition ) {
-        // get all employees that are further down the list:
-        // this.employeeRepository.find();
-    };
-
-    async getAll() {
-        return await this.employeeRepository.find();
+    async setPriority( employeeId, priority ) {
+        return await this.employeeRepository.update( employeeId, { priority } );
     }
 
-    async updateEmployee(employeeId, employeeData ) {
+    async setBhv( employeeId, isBhv ) {
+        return await this.employeeRepository.update( employeeId, { isBhv } );
+    }
+
+    async getAll() {
+        return await this.employeeRepository.find( {
+            order: {
+                priority: "DESC",
+                firstName: "ASC",
+            },
+        } );
+    }
+
+    async updateEmployee( employeeId, employeeData ) {
         const employee = await this.employeeRepository.findOne( employeeId );
         return await this.employeeRepository.update( employeeId, { ...employee, ...employeeData } );
     }

@@ -5,7 +5,7 @@ import NewEmployee from "../components/NewEmployee";
 
 function mapDispatchToProps( dispatch ) {
 	return {
-		newEmployee: ( firstName, lastName ) => dispatch( newEmployeeRequest( firstName, lastName ) ),
+		newEmployee: ( employeeData ) => dispatch( newEmployeeRequest( employeeData ) ),
 	}
 }
 

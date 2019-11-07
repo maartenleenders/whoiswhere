@@ -17,7 +17,7 @@ export class Employee {
     buildingId: number;
 
     @Column()
-    listOrder: number;
+    priority: number;
 
     @Column()
     isBhv: boolean;

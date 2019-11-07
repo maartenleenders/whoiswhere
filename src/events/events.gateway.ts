@@ -49,7 +49,7 @@ export class EventsGateway {
 
     @SubscribeMessage(NEW_EMPLOYEE_REQUEST)
     async createEmployee(client: Client, action: NewEmployeeRequestAction) {
-        const employee = await this.employeeService.create(action.employee);
+        const employee = await this.employeeService.create(action.employeeData);
         this.server.emit("serverReduxAction", {
             type: NEW_EMPLOYEE_CREATED,
             employee,

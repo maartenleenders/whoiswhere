@@ -25,13 +25,10 @@ export function retrieveEmployees() {
 	}
 }
 
-export function newEmployeeRequest( firstName, lastName ) {
+export function newEmployeeRequest( employeeData ) {
 	return {
 		type: NEW_EMPLOYEE_REQUEST,
-		employee: {
-			firstName,
-			lastName,
-		},
+		employeeData,
 		emit: true,
 	}
 }

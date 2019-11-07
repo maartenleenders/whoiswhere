@@ -21,7 +21,7 @@ interface UpdateEmployeeBuildingActionType {
 
 interface NewEmployeeRequestActionType {
     type: typeof NEW_EMPLOYEE_REQUEST;
-    employee: object;
+    employeeData: object;
 }
 
 interface DeleteEmployeeRequestActionType {
