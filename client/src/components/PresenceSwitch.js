@@ -6,6 +6,7 @@ import { ReactComponent as Building2Svg } from "./svg/building2.svg";
 import { ReactComponent as Building3Svg } from "./svg/building3.svg";
 import { ReactComponent as Building4Svg } from "./svg/building4.svg";
 import { ReactComponent as HouseSvg } from "./svg/house.svg";
+import { squareDimension } from "../constants";
 
 const buildingColors = [
 	colors.$color_grey_disabled,
@@ -23,8 +24,8 @@ const StyledTd = styled.td`
 
 const stylify = function( image ) {
 	return styled( image )`
-		height: 50px;
-		width: 50px;
+		height: ${ squareDimension };
+		width: ${ squareDimension };
 		padding: 3px;
 	`
 };

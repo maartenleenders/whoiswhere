@@ -3,6 +3,7 @@ import PresenceSwitch from "./PresenceSwitch";
 import { ReactComponent as IconBhv } from "./svg/redcross.svg";
 import { ReactComponent as Wastebin } from "./svg/wastebin.svg";
 import styled from "styled-components";
+import { squareDimension } from "../constants";
 
 const StyledTd = styled.td`
 	font-size: 1em;
@@ -21,8 +22,8 @@ const StyledButton = styled.button`
 `;
 
 const StyledWastebin = styled( Wastebin )`
-	height: 40px;
-	width: 40px;
+	height: ${ squareDimension };
+	width: ${ squareDimension };
 	background-color: transparent;
 	color: gray;
 `;
