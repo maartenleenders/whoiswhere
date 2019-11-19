@@ -4,7 +4,7 @@ import {
     WebSocketServer,
 } from '@nestjs/websockets';
 import {Client, Server} from 'socket.io';
-import {EmployeeService} from "../employees/employee.service";
+import {EmployeeService} from "../employee/employee.service";
 import {
     NewEmployeeRequestAction,
     RetrieveEmployeesAction,

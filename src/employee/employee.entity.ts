@@ -1,5 +1,5 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from 'typeorm';
-import {Building} from "../buildings/building.entity";
+import {Building} from "../building/building.entity";
 
 @Entity()
 export class Employee {
