@@ -21,7 +21,6 @@ const store = createStore(
 );
 
 socket.on( "serverReduxAction", ( action ) => {
-	console.log( action );
 	store.dispatch( action );
 } );
 
