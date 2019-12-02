@@ -21,8 +21,8 @@ import { EmployeeModule } from './employee/employee.module';
       TypeOrmModule.forFeature( [ Employee, Building, User ] ),
       EmployeeModule,
   ],
-  controllers: [AppController, BuildingController, EmployeeController, UserController],
-  providers: [AppService, EmployeeService, BuildingService, UserService, EventsGateway],
+  controllers: [AppController, BuildingController , UserController],
+  providers: [AppService , BuildingService, UserService ],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}

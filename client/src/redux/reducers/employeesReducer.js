@@ -36,8 +36,15 @@ export function employeesByIdReducer( state = initialState.byId, action ) {
 			return newState;
 		}
 		case DELETE_EMPLOYEE_SUCCESS: {
-			let newState = copyState();
-			delete newState[ action.employeeId ];
+			// Filter the object
+			const newState = Object.keys( state )
+				.filter( id => id !== action.employeeId )
+				.reduce( ( aggregator, id ) => {
+					return {
+						...aggregator,
+						[ id ]: state[ id ],
+					}
+				}, {} );
 			return newState;
 		}
 		default:
@@ -56,10 +63,7 @@ export function employeesAllIdsReducer( state = initialState.allIds, action ) {
 			return newState;
 		}
 		case DELETE_EMPLOYEE_SUCCESS: {
-			let newState = [ ...state ];
-			newState.filter( id => id !== action.employeeId );
-			console.log( newState );
-			return newState;
+			return state.filter( id => id !== action.employeeId );
 		}
 		default:
 			return state;

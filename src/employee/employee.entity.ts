@@ -4,8 +4,8 @@ import {Building} from "../building/building.entity";
 @Entity()
 export class Employee {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn( "uuid" )
+    id: string;
 
     @Column()
     firstName: string;

@@ -27,9 +27,6 @@ export class EmployeeController {
 
     @Post( '/:id/delete' )
     async deleteEmployee(@Param() params ) {
-        console.log( "DELETE REQUEST INCOMING OMG!" );
-        console.log( params );
-        const response = await this.employeeService.delete( params.id );
-        console.log( response );
+        await this.employeeService.delete( params.id );
     }
 }

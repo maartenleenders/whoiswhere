@@ -41,23 +41,12 @@ export function newEmployeeCreated( employee ) {
 	}
 }
 
-export function deleteEmployeeRequest_legacy( employeeId ) {
-	return {
-		type: DELETE_EMPLOYEE_REQUEST,
-		employeeId,
-		emit: true,
-	}
-}
-
 export function deleteEmployeeRequest( employeeId ) {
 	const Http = new XMLHttpRequest();
 	const url = `http://localhost:3000/employee/${employeeId}/delete`;
 	Http.open( "POST", url );
 	Http.send();
 
-	Http.onreadystatechange = () => {
-		console.log( Http.responseText );
-	};
 	return {
 		type: DELETE_EMPLOYEE_REQUEST,
 		employeeId,

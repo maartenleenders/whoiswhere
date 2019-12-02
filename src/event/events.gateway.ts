@@ -9,19 +9,19 @@ import {
     NewEmployeeRequestAction,
     RetrieveEmployeesAction,
     UpdateEmployeeBuildingAction,
-    DeleteEmployeeRequestAction,
     NEW_EMPLOYEE_CREATED,
     RETRIEVE_EMPLOYEES,
     UPDATE_EMPLOYEE_BUILDING,
     INCOMING_EMPLOYEES,
-    DELETE_EMPLOYEE_REQUEST,
     DELETE_EMPLOYEE_SUCCESS,
     NEW_EMPLOYEE_REQUEST,
 } from "../types/reduxTypes";
+import {forwardRef, Inject} from "@nestjs/common";
 
 @WebSocketGateway()
 export class EventsGateway {
     constructor(
+        @Inject(forwardRef( () => EmployeeService ) )
         private readonly employeeService: EmployeeService,
     ) {
     }
@@ -37,7 +37,6 @@ export class EventsGateway {
 
     @SubscribeMessage(UPDATE_EMPLOYEE_BUILDING)
     async updateEmployeeBuilding(client: Client, action: UpdateEmployeeBuildingAction) {
-        console.log( "serverside updateemployeebuilding:", action );
         await this.employeeService.setBuilding(action.employeeId, action.buildingId);
         client.broadcast.emit("serverReduxAction", {
                 type: UPDATE_EMPLOYEE_BUILDING,
@@ -56,12 +55,10 @@ export class EventsGateway {
         });
     }
 
-    @SubscribeMessage(DELETE_EMPLOYEE_REQUEST)
-    async deleteEmployee(client: Client, action: DeleteEmployeeRequestAction) {
-        await this.employeeService.delete(action.employeeId);
-        this.server.emit("serverReduxAction", {
+    confirmDeletion( employeeId: number ) {
+        this.server.emit( "serverReduxAction", {
             type: DELETE_EMPLOYEE_SUCCESS,
-            employeeId: action.employeeId,
+            employeeId,
         } );
     }
 }

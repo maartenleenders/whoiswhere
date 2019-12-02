@@ -3,8 +3,7 @@
  * The socket emits will be flagged with a "clientReduxAction" message.
  *
  * @example
- * The action { type: "FOO", payload: "bar", emit: true }
- * will be sent as "clientReduxAction" with the action as payload through the websocket.
+ * The action { type: "FOO", payload: "bar", emit: true } will be sent through the websocket.
  *
  * @param {*} socket The websocket to send the action to.
  *

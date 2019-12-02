@@ -1,13 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import {forwardRef, Inject, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {Employee} from "./employee.entity";
 import {MoreThanOrEqual, Repository} from "typeorm";
+import {EventsGateway} from "../event/events.gateway";
 
 @Injectable()
 export class EmployeeService {
     constructor(
         @InjectRepository(Employee)
         private readonly employeeRepository: Repository<Employee>,
+        @Inject(forwardRef( () => EventsGateway ) )
+        private readonly eventsGateway: EventsGateway,
     ) {}
 
     async create( employeeData ) {
@@ -20,8 +23,9 @@ export class EmployeeService {
     }
 
     async delete( id ) {
-        return await this.employeeRepository
-            .delete( { id } );
+        await this.employeeRepository.delete( { id } );
+        this.eventsGateway.confirmDeletion( id );
+        return;
     }
     async setBuilding( employeeId, buildingId ) {
         await this.employeeRepository.update( employeeId, { buildingId } );

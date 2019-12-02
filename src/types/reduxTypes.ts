@@ -6,7 +6,6 @@ export const UPDATE_EMPLOYEE_BUILDING = 'UPDATE_EMPLOYEE_BUILDING';
 export const NEW_EMPLOYEE_REQUEST = 'NEW_EMPLOYEE_REQUEST';
 export const NEW_EMPLOYEE_CREATED = 'NEW_EMPLOYEE_CREATED';
 
-export const DELETE_EMPLOYEE_REQUEST = 'DELETE_EMPLOYEE_REQUEST';
 export const DELETE_EMPLOYEE_SUCCESS = 'DELETE_EMPLOYEE_SUCCESS';
 
 interface RetrieveEmployeesActionType {
@@ -24,12 +23,6 @@ interface NewEmployeeRequestActionType {
     employeeData: object;
 }
 
-interface DeleteEmployeeRequestActionType {
-    type: typeof DELETE_EMPLOYEE_REQUEST;
-    employeeId: string;
-}
-
 export type RetrieveEmployeesAction = RetrieveEmployeesActionType;
 export type UpdateEmployeeBuildingAction = UpdateEmployeeBuildingActionType;
 export type NewEmployeeRequestAction = NewEmployeeRequestActionType;
-export type DeleteEmployeeRequestAction = DeleteEmployeeRequestActionType;
