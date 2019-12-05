@@ -19,6 +19,7 @@ services:
     volumes:
       - .:/usr/src/service
     working_dir: /usr/src/service
-    command: yarn start:dev
+#    Fix later: bcrypt elf header error because node modules not ignored when copying to volumes. Suggestion by Jip: only copy built version?
+    command: bash -c "rm -rf node_modules/bcrypt && yarn install --check-files && yarn start:dev"
 volumes:
   whoiswhere-datavolume:

@@ -11,12 +11,16 @@ import {User} from "./user/user.entity";
 import {UserController} from "./user/user.controller";
 import {UserService} from "./user/user.service";
 import { EmployeeModule } from './employee/employee.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
       TypeOrmModule.forRoot(),
       TypeOrmModule.forFeature( [ Employee, Building, User ] ),
       EmployeeModule,
+      AuthModule,
+      UserModule,
   ],
   controllers: [AppController, BuildingController , UserController],
   providers: [AppService , BuildingService, UserService ],

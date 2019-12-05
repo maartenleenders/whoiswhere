@@ -15,11 +15,6 @@ export class UserController {
         return this.userService.create( createUserDto );
     }
 
-    @Patch('/:id')
-    updateUser(@Body() createUserDto, @Param() params ) {
-        return this.userService.updateUser( params.id, createUserDto );
-    }
-
     @Post( '/:id/delete' )
     async deleteUser(@Param() params ) {
         await this.userService.delete( params.id );
