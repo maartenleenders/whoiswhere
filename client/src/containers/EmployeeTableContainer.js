@@ -7,6 +7,7 @@ import {
 	updateEmployeeBuilding
 } from "../redux/actions/employees";
 import { toggleAdminOptions } from "../redux/actions/ui";
+import { newUserRequest } from "../redux/actions/users";
 
 function mapStateToProps( state ) {
 	const employees = state.entities.employees.allIds.map( employeeId => state.entities.employees.byId[ employeeId ] );
@@ -24,6 +25,7 @@ function mapDispatchToProps( dispatch ) {
 		deleteEmployee: ( employeeId ) => dispatch( deleteEmployeeRequest( employeeId ) ),
 		toggleAdminOptions: () => dispatch( toggleAdminOptions() ),
 		addNewEmployee: ( employeeData ) => dispatch( newEmployeeRequest( employeeData ) ),
+		addNewUser: ( userData ) => dispatch( newUserRequest( userData ) ),
 	}
 }
 

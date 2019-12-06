@@ -11,18 +11,20 @@ export class UserService {
         private readonly userRepository: Repository<User>,
     ) {}
 
-    async hashPassword( password ) {
-        try {
-            return await bcrypt.hash( password, parseInt( process.env.SALTROUNDS, 10 ) );
-        } catch {
-            throw new Error( "Failed to set password." );
-        }
-    }
+    // async hashPassword( password ) {
+    //     try {
+    //         return await bcrypt.hash( password, parseInt( process.env.SALTROUNDS, 10 ) );
+    //     } catch {
+    //         throw new Error( "Failed to set password." );
+    //     }
+    // }
 
     async create( userData ) {
         const user = new User();
         user.userName = userData.userName;
-        user.password = await this.hashPassword( userData.password );
+        user.password = userData.password;
+        // user.password = await this.hashPassword( userData.password );
+        user.isAdmin = userData.isAdmin;
         return await this.userRepository.save( user );
     }
 

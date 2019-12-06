@@ -3,16 +3,11 @@ import styled from "styled-components";
 import { Button } from "./Button";
 import Checkbox from "./Checkbox";
 import Select from "react-select";
+import { StyledInput } from "./Forms";
 
 const NewEmployeeArea = styled.div`
 	width: 50%;
 	margin: 0 auto;
-`;
-const StyledInput = styled.input`
-	width: 50%;
-	box-sizing: border-box;
-	height: 2.5em;
-	margin-bottom: 2em;
 `;
 
 // React-select uses a different styling API, so the next bit looks a bit different from styled-components

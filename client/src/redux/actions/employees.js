@@ -42,14 +42,17 @@ export function newEmployeeCreated( employee ) {
 }
 
 export function deleteEmployeeRequest( employeeId ) {
-	const Http = new XMLHttpRequest();
-	const url = `http://localhost:3000/employee/${employeeId}/delete`;
-	Http.open( "POST", url );
-	Http.send();
+	return async dispatch => {
+		dispatch( {
+			type: DELETE_EMPLOYEE_REQUEST,
+			employeeId,
+			emit: false,
+		} );
 
-	return {
-		type: DELETE_EMPLOYEE_REQUEST,
-		employeeId,
-		emit: false,
-	}
+		const url = `http://localhost:3000/employee/${employeeId}/delete`;
+
+		await fetch( url, {
+			method: 'POST',
+		} );
+	};
 }
