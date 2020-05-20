@@ -3,6 +3,9 @@
    "version": "1.0.0",
    "description": "Nest TypeScript starter repository",
    "license": "MIT",
+   "engines": {
+      "node": "10.20.x"
+   },
    "scripts": {
       "build": "tsc -p tsconfig.build.json",
       "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
