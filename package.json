@@ -4,7 +4,7 @@
    "description": "Nest TypeScript starter repository",
    "license": "MIT",
    "engines": {
-      "node": "10.20.x"
+      "node": "^10.16.x"
    },
    "scripts": {
       "build": "tsc -p tsconfig.build.json",
@@ -50,7 +50,7 @@
       "ts-node": "3.3.0",
       "tsconfig-paths": "^3.7.0",
       "tslint": "5.12.1",
-      "typescript": "2.5.2"
+      "typescript": "^3.0.0"
    },
    "jest": {
       "moduleFileExtensions": [
