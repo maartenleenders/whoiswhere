@@ -1,10 +1,9 @@
 {
-   "type": "mysql",
+   "type": "postgres",
    "database": "whoiswhere",
-   "host": "whoiswhere-mysql",
-   "port": 3306,
-   "username": "root",
-   "password": "password",
+   "host": "whoiswhere-postgresql",
+   "port": 5432,
+   "username": "postgres",
    "synchronize": true,
    "logging": false,
    "entities": [

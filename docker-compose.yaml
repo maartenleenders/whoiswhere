@@ -1,21 +1,22 @@
 version: "3.7"
 services:
-  whoiswhere-mysql:
-    image: mysql:5
+  whoiswhere-postgresql:
+    image: postgres:latest
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: whoiswhere
+      # POSTGRES_PASSWORD: password
+      POSTGRES_DATABASE: whoiswhere
+      POSTGRES_USER: postgres
     volumes:
-      - whoiswhere-datavolume:/var/lib/mysql
+      - whoiswhere-datavolume:/var/lib/POSTGRES
   nestjs:
     image: zeepje/whoiswhere:latest
     build: .
     ports:
       - "3000:3000"
     depends_on:
-      - whoiswhere-mysql
+      - whoiswhere-postgresql
     volumes:
       - .:/usr/src/service
     working_dir: /usr/src/service
