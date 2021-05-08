@@ -34,7 +34,7 @@
       "rxjs": "^6.3.3",
       "socket.io": "^2.2.0",
       "sqlite3": "^4.0.3",
-      "typeorm": "0.2.14",
+      "typeorm": "0.2.25",
       "ts-node": "3.3.0",
       "typescript": "^3.0.0"
    },
